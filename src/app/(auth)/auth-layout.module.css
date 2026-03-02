@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.formContainer {
+  min-width: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  gap: 8rem;
+}
+
+.backgroundPhoto {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
