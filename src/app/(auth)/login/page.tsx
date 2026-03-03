@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./login.module.css";
 import TextInput from "@/components/Inputs/TextInput/TextInput";
+import Button from "@/components/Inputs/Button/Button";
 
 export default function LoginPage() {
   return (
@@ -11,7 +12,7 @@ export default function LoginPage() {
 
         <TextInput label="Mot de passe" isPassword={true} />
 
-        <button type="submit">Se connecter</button>
+        <Button textButton="Se connecter" />
 
         <Link href={"/login"}>Mot de passe oublié ?</Link>
       </form>

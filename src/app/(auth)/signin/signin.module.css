@@ -18,18 +18,3 @@
   margin: auto;
   margin-bottom: 2rem;
 }
-
-
-.form button {
-  color: white;
-  background-color: var(--black-metal);
-  height: 3rem;
-  width: 13.5rem;
-  border-radius: 0.5rem;
-  border: none;
-  margin: auto;
-}
-
-.container a, .container a:visited {
-  color: var(--orange);
-}

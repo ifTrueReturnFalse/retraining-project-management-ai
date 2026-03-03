@@ -1,0 +1,24 @@
+.button {
+  color: white;
+  background-color: var(--black-metal);
+  height: 3rem;
+  width: 13.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  margin: auto;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: white;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+}
+
+.button:disabled {
+  background-color: var(--light-grey);
+  color: var(--medium-grey);
+  border: none;
+  cursor: not-allowed;
+}
