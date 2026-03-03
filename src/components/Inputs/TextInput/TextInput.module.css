@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 18rem;
+}
+
+.label {
+  font-size: 1rem;
+}
+
+.input {
+  background-color: white;
+  border: 1px #E5E7EB solid;
+  height: 3.25rem;
+  border-radius: 0.25rem;
+  margin-bottom: 2rem;
+}

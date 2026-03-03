@@ -1,16 +1,15 @@
 import Link from "next/link";
 import styles from "./signin.module.css";
+import TextInput from "@/components/Inputs/TextInput/TextInput";
 
 export default function SignInPage() {
   return (
     <div className={styles.container}>
       <form className={styles.form}>
         <h1>Inscription</h1>
-        <label htmlFor="">Email</label>
-        <input type="text" name="" id="" />
+        <TextInput label="Email" isPassword={false} />
 
-        <label htmlFor="">Mot de passe</label>
-        <input type="password" name="" id="" />
+        <TextInput label="Mot de passe" isPassword={true} />
 
         <button type="submit">S&apos;inscrire</button>
       </form>

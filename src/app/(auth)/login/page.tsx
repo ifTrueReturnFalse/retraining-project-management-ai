@@ -1,19 +1,18 @@
-import Link from 'next/link'
-import styles from './login.module.css'
+import Link from "next/link";
+import styles from "./login.module.css";
+import TextInput from "@/components/Inputs/TextInput/TextInput";
 
 export default function LoginPage() {
   return (
     <div className={styles.container}>
       <form className={styles.form}>
         <h1>Connexion</h1>
-        <label htmlFor="">Email</label>
-        <input type="text" name="" id="" />
+        <TextInput label="Email" isPassword={false} />
 
-        <label htmlFor="">Mot de passe</label>
-        <input type="password" name="" id="" />
+        <TextInput label="Mot de passe" isPassword={true} />
 
         <button type="submit">Se connecter</button>
-        
+
         <Link href={"/login"}>Mot de passe oublié ?</Link>
       </form>
 
@@ -21,5 +20,5 @@ export default function LoginPage() {
         Pas encore de compte ? <Link href={"/signin"}>Créer un compte</Link>
       </p>
     </div>
-  )
+  );
 }
