@@ -1,0 +1,33 @@
+import styles from "./MenuBar.module.css";
+import Image from "next/image";
+import KanbanLogo from "@/components/Icons/KanbanLogo";
+import FolderIcon from "@/components/Icons/FolderIcon";
+import MenuItem from "../MenuItem/MenuItem";
+import { MenuItemProps } from "../MenuItem/MenuItem";
+import UserIcon from "@/components/Icons/UserIcon/UserIcon";
+
+const menuItems: MenuItemProps[] = [
+  { text: "Tableau de bord", Icon: KanbanLogo },
+  { text: "Kanban", Icon: FolderIcon },
+];
+
+export default function MenuBar() {
+  return (
+    <nav className={styles.container}>
+      <Image
+        src={"/images/logo/orange-logo.svg"}
+        alt="Logo"
+        width={150}
+        height={20}
+      />
+
+      <div className={styles.menuItems}>
+        {menuItems.map((item) => (
+          <MenuItem text={item.text} Icon={item.Icon} key={item.text} />
+        ))}
+      </div>
+
+      <UserIcon />
+    </nav>
+  );
+}
