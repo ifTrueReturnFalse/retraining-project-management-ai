@@ -1,0 +1,22 @@
+.chips {
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+  color: var(--orange);
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.9rem 1rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.chips svg path {
+  fill: var(--orange);
+}
+
+.chipsSelected {
+  background-color: var(--light-orange);
+}
