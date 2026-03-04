@@ -1,5 +1,6 @@
 import styles from "./ListView.module.css";
 import SearchBar from "../SearchBar/SearchBar";
+import ListTask from "../ListTask/ListTask";
 
 export default function ListView() {
   return (
@@ -12,7 +13,10 @@ export default function ListView() {
         <SearchBar />
       </div>
 
-      <div>{/** Future taches ici */}</div>
+      <div className={styles.viewListTasks}>{/** Future taches ici */}
+        <ListTask />
+        <ListTask />
+      </div>
     </div>
   );
 }

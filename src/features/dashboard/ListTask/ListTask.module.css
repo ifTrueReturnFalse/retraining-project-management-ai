@@ -1,0 +1,55 @@
+.container {
+  border: 1px solid var(--light-grey);
+  border-radius: 0.6rem;
+  padding: 2rem 2.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.subcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nameDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nameDescription h3 {
+  font-family: var(--font-manrope);
+  font-size: 1.2rem;
+}
+
+.nameDescription p {
+  color: var(--medium-grey);
+  font-size: 0.9rem;
+}
+
+.taskDetail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  color: var(--medium-grey);
+}
+
+.taskDetail span {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.taskDetail svg {
+  max-width: 1rem;
+}
+
+.taskDetail svg path {
+  fill: var(--medium-grey);
+}
+
+.button {
+  width: 7.5rem;
+}

@@ -1,0 +1,8 @@
+.tag {
+  height: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
