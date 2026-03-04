@@ -1,17 +1,33 @@
+"use client";
+
 import styles from "./Dashboard.module.css";
 import Button from "@/components/Inputs/Button/Button";
 import Chips from "@/components/Chips/Chips";
-import { ChipsProps } from "@/components/Chips/Chips";
 import TaskIcon from "@/components/Icons/TaskIcon";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
 import ListView from "@/features/dashboard/ListView/ListView";
+import KanbanView from "@/features/dashboard/KanbanView/KanbanView";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
-const chipsOptions: ChipsProps[] = [
-  { text: "Liste", Icon: TaskIcon },
-  { text: "Kanban", Icon: CalendarIcon },
+const chipsOptions = [
+  { text: "Liste", value: "list", Icon: TaskIcon },
+  { text: "Kanban", value: "kanban", Icon: CalendarIcon },
 ];
 
 export default function DashboardPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const viewType = searchParams.get("view") || "list";
+
+  const handleChipClick = (view: string) => {
+    console.log(view)
+    const params = new URLSearchParams();
+    params.set("view", view);
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <>
       <section className={styles.welcomeSection}>
@@ -27,12 +43,18 @@ export default function DashboardPage() {
       <section>
         <div className={styles.chipsContainer}>
           {chipsOptions.map((option) => (
-            <Chips key={option.text} text={option.text} Icon={option.Icon} />
+            <Chips
+              key={option.text}
+              text={option.text}
+              Icon={option.Icon}
+              onClick={() => handleChipClick(option.value)}
+              isActive={viewType === option.value}
+            />
           ))}
         </div>
       </section>
 
-      <ListView />
+      {viewType === "list" ? <ListView /> : <KanbanView />}
     </>
   );
 }
