@@ -1,0 +1,28 @@
+.container {
+  width: 100%;
+  background-color: white;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.75rem;
+  padding: 2rem 3.5rem;
+}
+
+.viewListMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.viewListMenuText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.viewListMenuText h2 {
+  font-family: var(--font-manrope);
+  font-size: 1.2rem;
+}
+
+.viewListMenuText p {
+  color: var(--medium-grey);
+}

@@ -4,6 +4,7 @@ import Chips from "@/components/Chips/Chips";
 import { ChipsProps } from "@/components/Chips/Chips";
 import TaskIcon from "@/components/Icons/TaskIcon";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
+import ListView from "@/features/dashboard/ListView/ListView";
 
 const chipsOptions: ChipsProps[] = [
   { text: "Liste", Icon: TaskIcon },
@@ -30,6 +31,8 @@ export default function DashboardPage() {
           ))}
         </div>
       </section>
+
+      <ListView />
     </>
   );
 }

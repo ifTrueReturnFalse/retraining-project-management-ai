@@ -1,0 +1,29 @@
+:root {
+  --offset: 4rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  left: var(--offset);
+}
+
+.searchBar {
+  width: 22rem;
+  height: 4rem;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--light-grey);
+}
+
+.button {
+  height: 4rem;
+  width: 4rem;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  right: var(--offset);
+}
