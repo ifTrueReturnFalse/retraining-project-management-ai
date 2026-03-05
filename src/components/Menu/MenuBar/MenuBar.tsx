@@ -16,7 +16,6 @@ const menuItems = [
 export default function MenuBar() {
   const pathname = usePathname();
   const paths = pathname.split("/");
-  console.log(paths);
 
   return (
     <nav className={styles.container}>
