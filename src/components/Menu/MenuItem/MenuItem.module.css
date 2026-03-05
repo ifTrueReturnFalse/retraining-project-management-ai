@@ -17,11 +17,11 @@
   transition: all 0.3s ease-in-out;
 }
 
-.container:hover {
+.isActive {
   background-color: var(--black-metal);
   color: white;
 }
 
-.container:hover .icon path {
+.isActive .icon path {
     fill: white;
 }

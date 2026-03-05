@@ -1,17 +1,23 @@
+"use client";
+
 import styles from "./MenuBar.module.css";
 import Image from "next/image";
 import DashboardLogo from "@/components/Icons/DashboardLogo";
 import FolderIcon from "@/components/Icons/FolderIcon";
 import MenuItem from "../MenuItem/MenuItem";
-import { MenuItemProps } from "../MenuItem/MenuItem";
 import UserIcon from "@/components/Icons/UserIcon/UserIcon";
+import { usePathname } from "next/navigation";
 
-const menuItems: MenuItemProps[] = [
-  { text: "Tableau de bord", Icon: DashboardLogo },
-  { text: "Projets", Icon: FolderIcon },
+const menuItems = [
+  { text: "Tableau de bord", Icon: DashboardLogo, url: "dashboard" },
+  { text: "Projets", Icon: FolderIcon, url: "project" },
 ];
 
 export default function MenuBar() {
+  const pathname = usePathname();
+  const paths = pathname.split("/");
+  console.log(paths);
+
   return (
     <nav className={styles.container}>
       <Image
@@ -23,7 +29,12 @@ export default function MenuBar() {
 
       <div className={styles.menuItems}>
         {menuItems.map((item) => (
-          <MenuItem text={item.text} Icon={item.Icon} key={item.text} />
+          <MenuItem
+            text={item.text}
+            Icon={item.Icon}
+            key={item.text}
+            isActive={item.url == paths[1]}
+          />
         ))}
       </div>
 
