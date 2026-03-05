@@ -15,4 +15,9 @@
   height: 3.25rem;
   border-radius: 0.25rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.input::placeholder {
+  color: var(--medium-grey);
 }

@@ -1,14 +1,15 @@
 import styles from "./TextInput.module.css";
+import { HTMLInputTypeAttribute } from "react";
 
 interface TextInputProps {
   label: string;
-  isPassword: boolean;
+  type?: HTMLInputTypeAttribute;
   placeholder?: string;
 }
 
 export default function TextInput({
   label,
-  isPassword,
+  type='text',
   placeholder = "",
 }: TextInputProps) {
   return (
@@ -17,16 +18,8 @@ export default function TextInput({
         {label}
       </label>
 
-      {!isPassword && (
-        <input type="text" className={styles.input} placeholder={placeholder} />
-      )}
-      {isPassword && (
-        <input
-          type="password"
-          className={styles.input}
-          placeholder={placeholder}
-        />
-      )}
+
+      <input type={type} className={styles.input} placeholder={placeholder} />
     </div>
   );
 }
