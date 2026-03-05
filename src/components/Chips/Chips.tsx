@@ -1,5 +1,6 @@
 import { ElementType } from "react";
 import styles from "./Chips.module.css";
+import classNames from "classnames";
 
 export interface ChipsProps {
   text: string;
@@ -9,12 +10,10 @@ export interface ChipsProps {
 }
 
 export default function Chips({ text, Icon, isActive, onClick }: ChipsProps) {
-  const active = isActive ? `${styles.chipsSelected}` : "";
-
   return (
     <button
       type="button"
-      className={`${styles.chips} ${active}`}
+      className={classNames(`${styles.chips}`, {[styles.chipsSelected]: isActive})}
       onClick={onClick}
     >
       <Icon />
