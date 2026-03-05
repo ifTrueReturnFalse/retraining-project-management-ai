@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #FFE0E0;
+  border-radius: 0.7rem;
+  padding: 2.5rem 1.5rem;
+}
+
+.columnHead {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.columnHead p {
+  font-family: var(--font-manrope);
+  font-size: 1.1rem;
+}

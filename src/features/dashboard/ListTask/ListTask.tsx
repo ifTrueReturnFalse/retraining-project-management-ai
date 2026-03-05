@@ -4,10 +4,19 @@ import FolderIcon from "@/components/Icons/FolderIcon";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
 import MessageIcon from "@/components/Icons/MessageIcon";
 import Tag from "@/components/Tag/Tag";
+import classNames from "classnames";
 
-export default function ListTask() {
+interface ListTaskProps {
+  kanbanStyle?: boolean;
+}
+
+export default function ListTask({ kanbanStyle = false }: ListTaskProps) {
   return (
-    <article className={styles.container}>
+    <article
+      className={classNames(`${styles.container}`, {
+        [styles.kanban]: kanbanStyle,
+      })}
+    >
       <div className={styles.subcontainer}>
         <div className={styles.nameDescription}>
           <h3>Nom de la tâche</h3>
@@ -16,7 +25,7 @@ export default function ListTask() {
         <Tag>Futur état</Tag>
       </div>
 
-      <div className={styles.subcontainer}>
+      <div className={styles.detailContainer}>
         <p className={styles.taskDetail}>
           <span>
             <FolderIcon /> Nom du projet
