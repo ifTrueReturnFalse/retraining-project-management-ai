@@ -1,0 +1,17 @@
+.container {
+  background-color: white;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.7rem;
+  padding: 3rem 4rem;
+  margin-top: 3.5rem;
+}
+
+.title {
+  font-family: var(--font-manrope);
+  font-size: 1.1rem;
+}
+
+.user {
+  color: var(--medium-grey);
+  margin-bottom: 2.5rem;
+}
