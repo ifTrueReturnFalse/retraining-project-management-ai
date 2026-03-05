@@ -10,6 +10,7 @@
   cursor: pointer;
   border-radius: 1.5rem;
   transition: all 0.3s ease-in-out;
+  text-decoration: none;
 }
 
 .icon path {
@@ -17,7 +18,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.isActive {
+.isActive, .isActive:visited {
   background-color: var(--black-metal);
   color: white;
 }
@@ -25,3 +26,4 @@
 .isActive .icon path {
     fill: white;
 }
+

@@ -33,6 +33,7 @@ export default function MenuBar() {
             Icon={item.Icon}
             key={item.text}
             isActive={item.url == paths[1]}
+            url={item.url}
           />
         ))}
       </div>
