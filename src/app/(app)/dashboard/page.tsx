@@ -22,7 +22,6 @@ export default function DashboardPage() {
   const viewType = searchParams.get("view") || "list";
 
   const handleChipClick = (view: string) => {
-    console.log(view)
     const params = new URLSearchParams();
     params.set("view", view);
     router.push(`${pathname}?${params.toString()}`);
