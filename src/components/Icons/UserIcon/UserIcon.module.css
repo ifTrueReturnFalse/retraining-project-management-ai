@@ -8,9 +8,14 @@
   align-items: center;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.container:hover {
+.container, .container:visited {
+  color: var(--black-metal);
+}
+
+.isActive, .isActive:visited {
   background-color: var(--orange);
   color: white;
 }

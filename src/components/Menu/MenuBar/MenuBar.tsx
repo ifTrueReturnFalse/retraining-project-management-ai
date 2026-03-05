@@ -32,13 +32,13 @@ export default function MenuBar() {
             text={item.text}
             Icon={item.Icon}
             key={item.text}
-            isActive={item.url == paths[1]}
+            isActive={item.url === paths[1]}
             url={item.url}
           />
         ))}
       </div>
 
-      <UserIcon />
+      <UserIcon isActive={paths[1] === 'account'} />
     </nav>
   );
 }

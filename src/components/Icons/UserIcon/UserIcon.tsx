@@ -1,5 +1,20 @@
-import styles from './UserIcon.module.css'
+import styles from "./UserIcon.module.css";
+import Link from "next/link";
+import classNames from "classnames";
 
-export default function UserIcon() {
-  return <div className={styles.container}>User</div>
+interface UserIconProps {
+  isActive: boolean;
+}
+
+export default function UserIcon({ isActive }: UserIconProps) {
+  return (
+    <Link
+      href={"account"}
+      className={classNames(`${styles.container}`, {
+        [styles.isActive]: isActive,
+      })}
+    >
+      User
+    </Link>
+  );
 }
