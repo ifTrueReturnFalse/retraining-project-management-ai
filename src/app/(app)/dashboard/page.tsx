@@ -1,13 +1,13 @@
 "use client";
 
 import styles from "./Dashboard.module.css";
-import Button from "@/components/Inputs/Button/Button";
 import Chips from "@/components/Chips/Chips";
 import TaskIcon from "@/components/Icons/TaskIcon";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
 import ListView from "@/features/dashboard/ListView/ListView";
 import KanbanView from "@/features/dashboard/KanbanView/KanbanView";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import DashProjHead from "@/components/DashProjHead/DashProjHead";
 
 const chipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
@@ -29,15 +29,10 @@ export default function DashboardPage() {
 
   return (
     <>
-      <section className={styles.welcomeSection}>
-        <div>
-          <h1>Tableau de bord</h1>
-          <p>Bonjour User, voici un aperçu de vos projets et tâches</p>
-        </div>
-        <div>
-          <Button textButton="+ Créer un projet" />
-        </div>
-      </section>
+      <DashProjHead
+        title="Tableau de bord"
+        description="Bonjour User, voici un aperçu de vos projets et tâches"
+      />
 
       <section>
         <div className={styles.chipsContainer}>

@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.container h1 {
+  font-family: var(--font-manrope);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
