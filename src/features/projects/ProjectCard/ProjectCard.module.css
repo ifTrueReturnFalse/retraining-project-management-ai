@@ -1,0 +1,74 @@
+.container {
+  background-color: white;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.8rem;
+  padding: 1.8rem 2rem;
+  text-decoration: none;
+  color: var(--black-metal);
+}
+
+.title {
+  font-family: var(--font-manrope);
+  font-size: 1.2rem;
+}
+
+.description {
+  color: var(--dark-grey);
+  font-size: 0.9rem;
+}
+
+.progressPercent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 3.5rem;
+  font-size: 0.75rem;
+}
+
+.progressPercent p:first-child {
+  color: var(--dark-grey);
+}
+
+.progressBar {
+  background-color: var(--light-grey);
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 2.5rem;
+  margin-top: 1rem;
+}
+
+.tasks {
+  color: var(--dark-grey);
+  font-size: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.team {
+  color: var(--dark-grey);
+  margin-top: 3.5rem;
+  font-size: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team svg path {
+  fill: var(--dark-grey);
+}
+
+.contributors {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.invitedContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.invited:not(:first-child) {
+  margin-left: -0.5rem;
+}

@@ -1,0 +1,41 @@
+import styles from "./ProjectCard.module.css";
+import TeamIcon from "@/components/Icons/TeamIcon";
+import UserTag from "@/components/UserTag/UserTag";
+import Tag from "@/components/Tag/Tag";
+import Link from "next/link";
+
+export default function ProjectCard() {
+  return (
+    <Link href={"project/123"} className={styles.container}>
+      <h3 className={styles.title}>Nom du projet</h3>
+      <p className={styles.description}>Description du projet</p>
+
+      <div className={styles.progressPercent}>
+        <p>Progression</p>
+        <p>0%</p>
+      </div>
+
+      <div className={styles.progressBar}></div>
+
+      <p className={styles.tasks}>0/2 tâches terminées</p>
+
+      <div className={styles.team}>
+        <TeamIcon />
+        Equipe (3)
+      </div>
+
+      <div className={styles.contributors}>
+        <UserTag isLeader={true} />
+        <Tag bgColor="#FFE8D9" fontColor="#D3590B">
+          Propriétaire
+        </Tag>
+        <div className={styles.invitedContainer}>
+          <UserTag className={styles.invited} />
+          <UserTag className={styles.invited} />
+          <UserTag className={styles.invited} />
+          <UserTag className={styles.invited} />
+        </div>
+      </div>
+    </Link>
+  );
+}
