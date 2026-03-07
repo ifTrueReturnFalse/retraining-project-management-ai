@@ -1,0 +1,15 @@
+.container {
+  background-color: var(--light-grey);
+  height: 2rem;
+  width: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  font-size: 0.7rem;
+}
+
+.leader {
+  background-color: var(--light-orange);
+}
