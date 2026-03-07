@@ -4,12 +4,12 @@
   border-radius: 0.8rem;
   padding: 1.8rem 2rem;
   text-decoration: none;
-  color: var(--black-metal);
 }
 
 .title {
   font-family: var(--font-manrope);
   font-size: 1.2rem;
+  color: var(--black-metal);
 }
 
 .description {
@@ -23,6 +23,7 @@
   justify-content: space-between;
   margin-top: 3.5rem;
   font-size: 0.75rem;
+  color: var(--black-metal);
 }
 
 .progressPercent p:first-child {
@@ -67,6 +68,10 @@
 .invitedContainer {
   display: flex;
   flex-direction: row;
+}
+
+.invited {
+  color: var(--black-metal);
 }
 
 .invited:not(:first-child) {
