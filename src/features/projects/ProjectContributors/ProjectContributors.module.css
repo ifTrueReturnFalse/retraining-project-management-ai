@@ -1,0 +1,32 @@
+.contributors {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3f4f6;
+  padding: 1.25rem 3rem;
+  margin-top: 3rem;
+  border-radius: 0.7rem;
+}
+
+.contributorsNumber {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-manrope);
+  font-size: 1.1rem;
+}
+
+.contributorsNumber span {
+  color: var(--dark-grey);
+  font-family: var(--font-inter);
+  font-size: 1rem;
+}
+
+.contributorsDetails {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  align-items: center;
+}
