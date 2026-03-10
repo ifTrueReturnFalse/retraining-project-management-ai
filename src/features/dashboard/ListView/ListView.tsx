@@ -1,5 +1,5 @@
 import styles from "./ListView.module.css";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../../../components/SearchBar/SearchBar";
 import ListTask from "../ListTask/ListTask";
 
 export default function ListView() {
