@@ -1,6 +1,7 @@
 import styles from "./UserIcon.module.css";
 import Link from "next/link";
 import classNames from "classnames";
+import routes from "@/utils/routes";
 
 interface UserIconProps {
   isActive: boolean;
@@ -9,7 +10,7 @@ interface UserIconProps {
 export default function UserIcon({ isActive }: UserIconProps) {
   return (
     <Link
-      href={"account"}
+      href={routes.ACCOUNT}
       className={classNames(`${styles.container}`, {
         [styles.isActive]: isActive,
       })}

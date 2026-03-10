@@ -3,10 +3,11 @@ import TeamIcon from "@/components/Icons/TeamIcon";
 import UserTag from "@/components/UserTag/UserTag";
 import Tag from "@/components/Tag/Tag";
 import Link from "next/link";
+import routes from "@/utils/routes";
 
 export default function ProjectCard() {
   return (
-    <Link href={"project/123"} className={styles.container}>
+    <Link href={routes.PROJECT("123")} className={styles.container}>
       <h3 className={styles.title}>Nom du projet</h3>
       <p className={styles.description}>Description du projet</p>
 

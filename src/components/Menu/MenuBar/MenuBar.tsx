@@ -7,10 +7,11 @@ import FolderIcon from "@/components/Icons/FolderIcon";
 import MenuItem from "../MenuItem/MenuItem";
 import UserIcon from "@/components/Icons/UserIcon/UserIcon";
 import { usePathname } from "next/navigation";
+import routes from "@/utils/routes";
 
 const menuItems = [
-  { text: "Tableau de bord", Icon: DashboardLogo, url: "/dashboard" },
-  { text: "Projets", Icon: FolderIcon, url: "/project" },
+  { text: "Tableau de bord", Icon: DashboardLogo, url: routes.DASHBOARD },
+  { text: "Projets", Icon: FolderIcon, url: routes.PROJECT_LIST },
 ];
 
 export default function MenuBar() {
@@ -32,13 +33,13 @@ export default function MenuBar() {
             text={item.text}
             Icon={item.Icon}
             key={item.text}
-            isActive={item.url === paths[1]}
+            isActive={item.url.slice(1) === paths[1]}
             url={item.url}
           />
         ))}
       </div>
 
-      <UserIcon isActive={paths[1] === 'account'} />
+      <UserIcon isActive={paths[1] === routes.ACCOUNT.slice(1)} />
     </nav>
   );
 }
