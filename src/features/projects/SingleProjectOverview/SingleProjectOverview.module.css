@@ -1,0 +1,41 @@
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.projectDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.titleEdit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.titleEdit h2 {
+  font-family: var(--font-manrope);
+}
+
+.titleEdit p {
+  color: var(--orange);
+  text-decoration: underline;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.description {
+  color: var(--dark-grey);
+  font-size: 1.1rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
