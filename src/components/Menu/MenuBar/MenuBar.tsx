@@ -9,8 +9,8 @@ import UserIcon from "@/components/Icons/UserIcon/UserIcon";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
-  { text: "Tableau de bord", Icon: DashboardLogo, url: "dashboard" },
-  { text: "Projets", Icon: FolderIcon, url: "project" },
+  { text: "Tableau de bord", Icon: DashboardLogo, url: "/dashboard" },
+  { text: "Projets", Icon: FolderIcon, url: "/project" },
 ];
 
 export default function MenuBar() {
