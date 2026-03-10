@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  height: 4rem;
+  background-color: transparent;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.5rem;
+  color: var(--dark-grey);
+  padding-left: 1.5rem;
+  padding-right: 4rem;
+}
+
+.arrow {
+  position: absolute;
+  right: 1.5rem;
+  pointer-events: none;
+}
+
+.arrow path {
+  stroke: var(--dark-grey);
+}
