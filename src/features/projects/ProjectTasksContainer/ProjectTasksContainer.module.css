@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2rem;
+  background-color: white;
+  padding: 2.2rem 3.8rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.8rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title h2 {
+  font-family: var(--font-manrope);
+}
+
+.title p {
+  color: var(--dark-grey);
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controls span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2.8rem;
+}
