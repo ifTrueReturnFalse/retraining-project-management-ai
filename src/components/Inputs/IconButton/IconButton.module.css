@@ -7,4 +7,11 @@
   color: var(--dark-grey);
   font-size: 1rem;
   cursor: pointer;
+  background-color: white;
+  transition: all ease-in-out 0.2s;
+}
+
+.button:hover {
+  color: var(--orange);
+  border: 1px solid var(--orange);
 }

@@ -7,7 +7,7 @@ import CalendarIcon from "@/components/Icons/CalendarIcon";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
 import ProjectTaskComment from "../ProjectTaskComment/ProjectTaskComment";
 import ProjectTaskCommentInput from "../ProjectTaskCommentInput/ProjectTaskCommentInput";
-import DotButton from "@/components/Inputs/DotButton/DotButton";
+import IconButton from "@/components/Inputs/IconButton/IconButton";
 import { useState } from "react";
 import classNames from "classnames";
 
@@ -24,7 +24,7 @@ export default function ProjectTask() {
           </div>
           <p>Le descriptif de la tâche à réaliser</p>
         </div>
-        <DotButton />
+        <IconButton>&bull;&bull;&bull;</IconButton>
       </section>
 
       <section className={styles.taskDetail}>
