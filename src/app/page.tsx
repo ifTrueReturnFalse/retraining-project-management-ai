@@ -1,9 +1,6 @@
-import styles from "./page.module.css";
+import { redirect, RedirectType } from "next/navigation";
+import routes from "@/utils/routes";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <p>Abricot</p>
-    </div>
-  );
+  redirect(routes.DASHBOARD, RedirectType.replace)
 }
