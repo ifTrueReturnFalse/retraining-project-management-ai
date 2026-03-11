@@ -7,6 +7,7 @@ import CalendarIcon from "@/components/Icons/CalendarIcon";
 import { useSearchParams } from "next/navigation";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import SelectInput from "@/components/Inputs/SelectInput/SelectInput";
+import ProjectTask from "../ProjectTask/ProjectTask";
 
 const ChipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
@@ -19,28 +20,35 @@ export default function ProjectTasksContainer() {
 
   return (
     <section className={styles.container}>
-      <div className={styles.title}>
-        <h2>Tâches</h2>
-        <p>Par ordre de priorité</p>
+      <div className={styles.head}>
+        <div className={styles.title}>
+          <h2>Tâches</h2>
+          <p>Par ordre de priorité</p>
+        </div>
+
+        <div className={styles.controls}>
+          <span>
+            {ChipsOptions.map((option) => (
+              <Chips
+                key={option.value}
+                text={option.text}
+                Icon={option.Icon}
+                isActive={viewType === option.value}
+              />
+            ))}
+          </span>
+
+          <SelectInput>
+            <option value="">Statut</option>
+          </SelectInput>
+
+          <SearchBar />
+        </div>
       </div>
 
-      <div className={styles.controls}>
-        <span>
-          {ChipsOptions.map((option) => (
-            <Chips
-              key={option.value}
-              text={option.text}
-              Icon={option.Icon}
-              isActive={viewType === option.value}
-            />
-          ))}
-        </span>
-
-        <SelectInput>
-          <option value="">Statut</option>
-        </SelectInput>
-
-        <SearchBar />
+      <div className={styles.tasksContainer}>
+        <ProjectTask />
+        <ProjectTask />
       </div>
     </section>
   );

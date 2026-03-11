@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  gap: 1rem;
+}
+
+.commentContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--white-grey);
+  padding: 1.2rem 1.1rem;
+  border-radius: 0.8rem;
+}
+
+.commentHead {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user {
+  font-size: 0.9rem;
+}
+
+.date {
+  color: var(--dark-grey);
+  font-size: 0.8rem;
+}
+
+.comment {
+  font-size: 0.8rem;
+}
