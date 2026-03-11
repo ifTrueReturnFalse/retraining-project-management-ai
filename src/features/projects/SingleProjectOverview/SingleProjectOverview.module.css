@@ -4,6 +4,11 @@
   justify-content: space-between;
 }
 
+.backButton {
+  position: absolute;
+  left: 2rem;
+}
+
 .projectDetail {
   display: flex;
   flex-direction: column;
