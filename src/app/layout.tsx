@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
-import QueryProvider from "@/components/providers/QueryProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${inter.variable} ${manrope.variable}`}>
-        <QueryProvider>{children}</QueryProvider>
+        {children}
       </body>
     </html>
   );
