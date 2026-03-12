@@ -1,25 +1,21 @@
 import styles from "./TextInput.module.css";
-import { HTMLInputTypeAttribute } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
-interface TextInputProps {
+interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
-  type?: HTMLInputTypeAttribute;
-  placeholder?: string;
+  id?: string;
 }
 
-export default function TextInput({
-  label,
-  type='text',
-  placeholder = "",
-}: TextInputProps) {
+export default function TextInput({ label, id, ...props }: TextInputProps) {
+  const inputId = id || props.name;
+
   return (
     <div className={styles.container}>
-      <label htmlFor="" className={styles.label}>
+      <label htmlFor={inputId} className={styles.label}>
         {label}
       </label>
 
-
-      <input type={type} className={styles.input} placeholder={placeholder} />
+      <input id={inputId} className={styles.input} {...props} />
     </div>
   );
 }
