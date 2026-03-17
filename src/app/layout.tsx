@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
+import { UserProvider } from "@/context/UserContext";
+import { cookies } from "next/headers";
+import { authService } from "@/services/auth.service";
+import KeyboardManager from "@/utils/KeyboardManager";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,15 +21,28 @@ export const metadata: Metadata = {
   description: "Your AI project management app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_jwt");
+  let user = null;
+
+  if (token) {
+    try {
+      user = await authService.profile();
+    } catch {
+      user = null;
+    }
+  }
+
   return (
     <html lang="fr">
       <body className={`${inter.variable} ${manrope.variable}`}>
-        {children}
+        <KeyboardManager />
+        <UserProvider initialUser={user}>{children}</UserProvider>
       </body>
     </html>
   );
