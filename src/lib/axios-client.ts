@@ -10,4 +10,5 @@ const getBasedUrl = () => {
 
 export const internalApi = axios.create({
   baseURL: getBasedUrl(),
+  withCredentials: true,
 });

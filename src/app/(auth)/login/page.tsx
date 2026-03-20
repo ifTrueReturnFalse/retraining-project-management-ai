@@ -6,7 +6,7 @@ import TextInput from "@/components/Inputs/TextInput/TextInput";
 import Button from "@/components/Inputs/Button/Button";
 import routes from "@/utils/routes";
 import { useState } from "react";
-import { authService } from "@/services/auth.service";
+import { authService } from "@/services/auth.client.service";
 import { useRouter } from "next/navigation";
 import { ApiError } from "@/models/api.model";
 import { useUser } from "@/context/UserContext";
@@ -18,7 +18,7 @@ export default function LoginPage() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const {setUser} = useUser()
+  const { setUser } = useUser();
 
   const router = useRouter();
 
@@ -34,8 +34,11 @@ export default function LoginPage() {
 
     try {
       const response = await authService.login(credentials);
-      setUser(response.user)
-      router.push("/dashboard");
+      setUser(response.user);
+      router.refresh();
+      window.setTimeout(() => {
+        router.push("/dashboard");
+      }, 50);
     } catch (error) {
       if (error instanceof ApiError) {
         setError(`Erreur : ${error.message}`);

@@ -10,6 +10,6 @@ export const externalApi = async () => {
     headers: {
       Authorization: token ? `Bearer ${token.value}` : "",
     },
+    withCredentials: true,
   });
 };
-

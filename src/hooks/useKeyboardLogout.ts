@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { authService } from "@/services/auth.service";
+import { authService } from "@/services/auth.client.service";
 import { useRouter } from "next/navigation";
 
 export const useKeyboardLogout = () => {

@@ -35,3 +35,15 @@ export const useUser = () => {
 
   return context;
 };
+
+export const useRequiredUser = () => {
+  const context = useUser();
+
+  if (!context.user) {
+    throw new Error(
+      "useRequiredUser must be used in a protected route where user is guaranteed.",
+    );
+  }
+
+  return context as UserContextType & { user: UserProfile };
+};

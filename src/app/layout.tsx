@@ -3,7 +3,7 @@ import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@/context/UserContext";
 import { cookies } from "next/headers";
-import { authService } from "@/services/auth.service";
+import { authServerService } from "@/services/auth.server.service";
 import KeyboardManager from "@/utils/KeyboardManager";
 
 const inter = Inter({
@@ -32,7 +32,7 @@ export default async function RootLayout({
 
   if (token) {
     try {
-      user = await authService.profile();
+      user = await authServerService.profile();
     } catch {
       user = null;
     }

@@ -14,7 +14,8 @@ export const UserLoginSchema = z.object({
   token: z.string(),
 });
 
-export const UserProfileResponseSchema =
-  createApiResponseSchema(UserProfileSchema);
+export const UserProfileResponseSchema = createApiResponseSchema(
+  z.object({ user: UserProfileSchema }),
+);
 
 export const UserLoginResponseSchema = createApiResponseSchema(UserLoginSchema);
