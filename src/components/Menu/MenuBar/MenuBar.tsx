@@ -8,6 +8,7 @@ import MenuItem from "../MenuItem/MenuItem";
 import UserIcon from "@/components/Icons/UserIcon/UserIcon";
 import { usePathname } from "next/navigation";
 import routes from "@/utils/routes";
+import { useRequiredUser } from "@/context/UserContext";
 
 const menuItems = [
   { text: "Tableau de bord", Icon: DashboardLogo, url: routes.DASHBOARD },
@@ -17,6 +18,7 @@ const menuItems = [
 export default function MenuBar() {
   const pathname = usePathname();
   const paths = pathname.split("/");
+  const { user } = useRequiredUser();
 
   return (
     <nav className={styles.container}>
@@ -39,7 +41,7 @@ export default function MenuBar() {
         ))}
       </div>
 
-      <UserIcon isActive={paths[1] === routes.ACCOUNT.slice(1)} />
+      <UserIcon isActive={paths[1] === routes.ACCOUNT.slice(1)} user={user} />
     </nav>
   );
 }
