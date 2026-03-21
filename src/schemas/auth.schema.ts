@@ -9,6 +9,12 @@ export const UserProfileSchema = z.object({
   updatedAt: z.iso.datetime(),
 });
 
+export const BasicUserProfileSchema = UserProfileSchema.pick({
+  id: true,
+  email: true,
+  name: true,
+});
+
 export const UserLoginSchema = z.object({
   user: UserProfileSchema,
   token: z.string(),
