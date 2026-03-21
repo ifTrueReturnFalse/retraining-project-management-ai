@@ -9,6 +9,7 @@ import KanbanView from "@/features/dashboard/KanbanView/KanbanView";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import DashProjHead from "@/components/DashProjHead/DashProjHead";
 import { useRequiredUser } from "@/context/UserContext";
+import { useAssignedTasks } from "@/hooks/useTasks";
 
 const chipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
@@ -19,7 +20,8 @@ export default function DashboardPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const {user} = useRequiredUser()
+  const { user } = useRequiredUser();
+  const { tasks } = useAssignedTasks();
 
   const viewType = searchParams.get("view") || "list";
 
@@ -50,7 +52,11 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {viewType === "list" ? <ListView /> : <KanbanView />}
+      {viewType === "list" ? (
+        <ListView tasks={tasks} />
+      ) : (
+        <KanbanView tasks={tasks} />
+      )}
     </>
   );
 }

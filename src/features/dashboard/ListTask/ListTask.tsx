@@ -5,12 +5,15 @@ import CalendarIcon from "@/components/Icons/CalendarIcon";
 import MessageIcon from "@/components/Icons/MessageIcon";
 import Tag from "@/components/Tag/Tag";
 import classNames from "classnames";
+import { Task } from "@/models/tasks.model";
+import { ISODateToTaskView } from "@/utils/dateManagement";
 
 interface ListTaskProps {
   kanbanStyle?: boolean;
+  task: Task;
 }
 
-export default function ListTask({ kanbanStyle = false }: ListTaskProps) {
+export default function ListTask({ kanbanStyle = false, task }: ListTaskProps) {
   return (
     <article
       className={classNames(`${styles.container}`, {
@@ -19,8 +22,8 @@ export default function ListTask({ kanbanStyle = false }: ListTaskProps) {
     >
       <div className={styles.subcontainer}>
         <div className={styles.nameDescription}>
-          <h3>Nom de la tâche</h3>
-          <p>Description de la tâche</p>
+          <h3>{task.title}</h3>
+          <p>{task.description}</p>
         </div>
         <Tag>Futur état</Tag>
       </div>
@@ -28,19 +31,19 @@ export default function ListTask({ kanbanStyle = false }: ListTaskProps) {
       <div className={styles.detailContainer}>
         <p className={styles.taskDetail}>
           <span>
-            <FolderIcon /> Nom du projet
+            <FolderIcon /> {task.project.name}
           </span>
 
           <span>|</span>
 
           <span>
-            <CalendarIcon /> 9 mars
+            <CalendarIcon /> {ISODateToTaskView(task.dueDate)}
           </span>
 
           <span>|</span>
 
           <span>
-            <MessageIcon /> 2
+            <MessageIcon /> {task.comments.length}
           </span>
         </p>
         <div>

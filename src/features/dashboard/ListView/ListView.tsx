@@ -1,8 +1,11 @@
 import styles from "./ListView.module.css";
 import SearchBar from "../../../components/SearchBar/SearchBar";
 import ListTask from "../ListTask/ListTask";
+import { Task } from "@/models/tasks.model";
 
-export default function ListView() {
+export default function ListView({ tasks }: { tasks: Task[] }) {
+  if (!tasks.length) return <p>Pas de tâche assignée.</p>;
+
   return (
     <div className={styles.container}>
       <div className={styles.viewListMenu}>
@@ -13,9 +16,10 @@ export default function ListView() {
         <SearchBar />
       </div>
 
-      <div className={styles.viewListTasks}>{/** Future taches ici */}
-        <ListTask />
-        <ListTask />
+      <div className={styles.viewListTasks}>
+        {tasks.map((task) => (
+          <ListTask key={task.id} task={task} />
+        ))}
       </div>
     </div>
   );
