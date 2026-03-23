@@ -1,10 +1,23 @@
+import { ComponentPropsWithoutRef } from "react";
 import styles from "./SearchBar.module.css";
 import MagGlassIcon from "@/components/Icons/MagGlassIcon";
 
-export default function SearchBar() {
+interface SearchBarProps extends Omit<
+  ComponentPropsWithoutRef<"input">,
+  "onChange"
+> {
+  onChange: (value: string) => void;
+}
+
+export default function SearchBar({ onChange, ...props }: SearchBarProps) {
   return (
     <div className={styles.container}>
-      <input type="text" name="" id="" className={styles.searchBar} placeholder="Rechercher une tâche" />
+      <input
+        className={styles.searchBar}
+        placeholder="Rechercher une tâche"
+        value={props.value}
+        onChange={(event) => onChange(event.target.value)}
+      />
       <button type="button" className={styles.button}>
         <MagGlassIcon />
       </button>
