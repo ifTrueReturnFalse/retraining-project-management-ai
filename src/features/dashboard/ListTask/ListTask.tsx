@@ -3,7 +3,7 @@ import Button from "@/components/Inputs/Button/Button";
 import FolderIcon from "@/components/Icons/FolderIcon";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
 import MessageIcon from "@/components/Icons/MessageIcon";
-import Tag from "@/components/Tag/Tag";
+import StatusTag from "@/components/Tags/StatusTag/StatusTag";
 import classNames from "classnames";
 import { Task } from "@/models/tasks.model";
 import { ISODateToTaskView } from "@/utils/dateManagement";
@@ -25,7 +25,7 @@ export default function ListTask({ kanbanStyle = false, task }: ListTaskProps) {
           <h3>{task.title}</h3>
           <p>{task.description}</p>
         </div>
-        <Tag>Futur état</Tag>
+        <StatusTag status={task.status} />
       </div>
 
       <div className={styles.detailContainer}>

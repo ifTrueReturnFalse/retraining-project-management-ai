@@ -1,5 +1,5 @@
 import styles from "./ProjectTaskCommentInput.module.css";
-import UserTag from "@/components/UserTag/UserTag";
+import UserTag from "@/components/Tags/UserTag/UserTag";
 import Button from "@/components/Inputs/Button/Button";
 
 export default function ProjectTaskCommentInput() {

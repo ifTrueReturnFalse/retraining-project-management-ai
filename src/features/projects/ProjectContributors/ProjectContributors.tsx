@@ -1,6 +1,6 @@
 import styles from "./ProjectContributors.module.css";
-import Tag from "@/components/Tag/Tag";
-import UserTag from "@/components/UserTag/UserTag";
+import UserContributorTag from "@/components/Tags/UserContributorTag/UserContributorTag";
+import UserTag from "@/components/Tags/UserTag/UserTag";
 
 export default function ProjectContributors() {
   return (
@@ -10,17 +10,12 @@ export default function ProjectContributors() {
       </div>
       <div className={styles.contributorsDetails}>
         <UserTag isLeader={true} />
-        <Tag bgColor="#FFE8D9" fontColor="#D3590B">
-          Propriétaire
-        </Tag>
+        <UserContributorTag isOwner={true} userName="Proprio" />
+        
         <UserTag />
-        <Tag bgColor="#E5E7EB" fontColor="#6B7280">
-          Bertrand Dupont
-        </Tag>
+        <UserContributorTag userName="Un contributeur" />
         <UserTag />
-        <Tag bgColor="#E5E7EB" fontColor="#6B7280">
-          Bertrand Dupont
-        </Tag>
+        <UserContributorTag userName="Un contributeur" />
       </div>
     </div>
   );

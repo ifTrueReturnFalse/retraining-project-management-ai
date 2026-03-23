@@ -1,5 +1,5 @@
 import styles from "./KanbanColumn.module.css";
-import Tag from "@/components/Tag/Tag";
+import Tag from "@/components/Tags/Tag/Tag";
 import ListTask from "../ListTask/ListTask";
 import { Task } from "@/models/tasks.model";
 
@@ -13,7 +13,7 @@ export default function KanbanColumn({ columnName, tasks }: KanbanColumnProps) {
     <div className={styles.container}>
       <div className={styles.columnHead}>
         <p>{columnName}</p>
-        <Tag bgColor="#E5E7EB" fontColor="#6B7280">
+        <Tag className={styles.columnTag}>
           {tasks.length}
         </Tag>
       </div>

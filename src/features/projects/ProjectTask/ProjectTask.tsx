@@ -1,8 +1,9 @@
 "use client";
 
 import styles from "./ProjectTask.module.css";
-import Tag from "@/components/Tag/Tag";
-import UserTag from "@/components/UserTag/UserTag";
+import Tag from "@/components/Tags/Tag/Tag";
+import UserContributorTag from "@/components/Tags/UserContributorTag/UserContributorTag";
+import UserTag from "@/components/Tags/UserTag/UserTag";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
 import ProjectTaskComment from "../ProjectTaskComment/ProjectTaskComment";
@@ -38,13 +39,10 @@ export default function ProjectTask() {
           Assigné à :{" "}
           <span>
             <UserTag />
-            <Tag bgColor="#E5E7EB" fontColor="#6B7280">
-              Un user
-            </Tag>
+            <UserContributorTag userName="Un user" />
+            
             <UserTag />
-            <Tag bgColor="#E5E7EB" fontColor="#6B7280">
-              Un user
-            </Tag>
+            <UserContributorTag userName="Un user" />
           </span>
         </div>
       </section>

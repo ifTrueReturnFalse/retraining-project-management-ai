@@ -1,0 +1,14 @@
+.todo {
+  background-color: #FFE0E0;
+  color: #EF4444;
+}
+
+.inprogress {
+  background-color: #FFF0D7;
+  color: #E08D00;
+}
+
+.done {
+  background-color: #F1FFF7;
+  color: #27AE60;
+}

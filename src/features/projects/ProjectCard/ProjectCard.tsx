@@ -1,7 +1,7 @@
 import styles from "./ProjectCard.module.css";
 import TeamIcon from "@/components/Icons/TeamIcon";
-import UserTag from "@/components/UserTag/UserTag";
-import Tag from "@/components/Tag/Tag";
+import UserTag from "@/components/Tags/UserTag/UserTag";
+import Tag from "@/components/Tags/Tag/Tag";
 import Link from "next/link";
 import routes from "@/utils/routes";
 
@@ -27,7 +27,7 @@ export default function ProjectCard() {
 
       <div className={styles.contributors}>
         <UserTag isLeader={true} />
-        <Tag bgColor="#FFE8D9" fontColor="#D3590B">
+        <Tag className={styles.owner}>
           Propriétaire
         </Tag>
         <div className={styles.invitedContainer}>

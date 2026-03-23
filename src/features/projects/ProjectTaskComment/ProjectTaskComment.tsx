@@ -1,5 +1,5 @@
 import styles from './ProjectTaskComment.module.css'
-import UserTag from '@/components/UserTag/UserTag'
+import UserTag from '@/components/Tags/UserTag/UserTag'
 
 export default function ProjectTaskComment() {
   return (

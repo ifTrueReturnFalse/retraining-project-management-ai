@@ -20,3 +20,8 @@
   font-family: var(--font-manrope);
   font-size: 1.1rem;
 }
+
+.columnTag {
+  background-color: var(--light-grey);
+  color: var(--dark-grey);
+}

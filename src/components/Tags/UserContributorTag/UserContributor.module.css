@@ -1,0 +1,9 @@
+.baseColor {
+  background-color: var(--light-grey);
+  color: var(--dark-grey);
+}
+
+.owner {
+  background-color: var(--light-orange);
+  color: var(--orange);
+}
