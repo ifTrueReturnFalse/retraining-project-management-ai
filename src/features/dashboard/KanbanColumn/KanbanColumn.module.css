@@ -25,3 +25,9 @@
   background-color: var(--light-grey);
   color: var(--dark-grey);
 }
+
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
