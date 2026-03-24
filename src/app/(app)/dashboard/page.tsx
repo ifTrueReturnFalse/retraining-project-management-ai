@@ -10,6 +10,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import DashProjHead from "@/components/DashProjHead/DashProjHead";
 import { useRequiredUser } from "@/context/UserContext";
 import { useAssignedTasks } from "@/hooks/useTasks";
+import ModalManager from "@/components/Modals/ModalManager/ModalManager";
 
 const chipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
@@ -51,6 +52,8 @@ export default function DashboardPage() {
           ))}
         </div>
       </section>
+
+      <ModalManager />
 
       {viewType === "list" ? (
         <ListView tasks={tasks} />

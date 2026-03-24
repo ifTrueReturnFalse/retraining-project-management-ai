@@ -28,3 +28,11 @@ export const TaskApiResponseSchema = createApiResponseSchema(
     tasks: z.array(TaskSchema),
   }),
 );
+
+export const TaskInputSchema = TaskSchema.pick({
+  title: true,
+  description: true,
+  dueDate: true,
+  assignees: true,
+  status: true,
+});
