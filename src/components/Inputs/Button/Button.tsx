@@ -1,6 +1,7 @@
 import styles from "./Button.module.css";
+import { ComponentPropsWithoutRef } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   textButton: string;
   isSubmit?: boolean;
   disabled?: boolean;
@@ -12,16 +13,16 @@ export default function Button({
   isSubmit = false,
   disabled = false,
   className = "",
+  ...props
 }: ButtonProps) {
   return (
-    <>
-      <button
-        className={`${styles.button} ${className}`}
-        type={isSubmit ? "submit" : "button"}
-        disabled={disabled ? true : false}
-      >
-        {textButton}
-      </button>
-    </>
+    <button
+    {...props}  
+    className={`${styles.button} ${className}`}
+      type={isSubmit ? "submit" : "button"}
+      disabled={disabled}
+    >
+      {textButton}
+    </button>
   );
 }

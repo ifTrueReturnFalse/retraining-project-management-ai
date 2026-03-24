@@ -7,6 +7,7 @@ import StatusTag from "@/components/Tags/StatusTag/StatusTag";
 import classNames from "classnames";
 import { Task } from "@/models/tasks.model";
 import { ISODateToTaskView } from "@/utils/dateManagement";
+import { useModalStore } from "@/store/modalStore";
 
 interface ListTaskProps {
   kanbanStyle?: boolean;
@@ -14,6 +15,8 @@ interface ListTaskProps {
 }
 
 export default function ListTask({ kanbanStyle = false, task }: ListTaskProps) {
+  const { open } = useModalStore();
+
   return (
     <article
       className={classNames(`${styles.container}`, {
@@ -51,6 +54,7 @@ export default function ListTask({ kanbanStyle = false, task }: ListTaskProps) {
             textButton="Voir"
             isSubmit={false}
             className={styles.button}
+            onClick={() => open({ type: "TASK_UPDATE", data: task })}
           />
         </div>
       </div>
