@@ -1,6 +1,7 @@
 import styles from "./TaskUpdateModal.module.css";
 import TextInput from "@/components/Inputs/TextInput/TextInput";
 import DateInput from "@/components/Inputs/DateInput/DateInput";
+import AssigneeInput from "@/components/Inputs/AssigneeInput/AssigneeInput";
 import { Task } from "@/models/tasks.model";
 
 interface TaskUpdateProps {
@@ -11,9 +12,10 @@ export default function TaskUpdateModal({ task }: TaskUpdateProps) {
   return (
     <div className={styles.container}>
       <h2>Modifier</h2>
-      <TextInput label="Titre" value={task.title} />
-      <TextInput label="Description" value={task.description} />
+      <TextInput label="Titre" value={task.title} onChange={console.log} />
+      <TextInput label="Description" value={task.description} onChange={console.log} />
       <DateInput value={task.dueDate} onChange={console.log} />
+      <AssigneeInput task={task} />
     </div>
   );
 }
