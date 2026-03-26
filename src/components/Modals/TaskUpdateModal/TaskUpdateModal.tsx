@@ -12,7 +12,7 @@ interface TaskUpdateProps {
 
 export default function TaskUpdateModal({ task }: TaskUpdateProps) {
   return (
-    <div className={styles.container}>
+    <form className={styles.container}>
       <h2>Modifier</h2>
       <TextInput label="Titre" value={task.title} onChange={console.log} />
       <TextInput label="Description" value={task.description} onChange={console.log} />
@@ -20,6 +20,6 @@ export default function TaskUpdateModal({ task }: TaskUpdateProps) {
       <AssigneeInput task={task} />
       <StatusInput task={task} />
       <Button textButton="Enregistrer" className={styles.saveButton} />
-    </div>
+    </form>
   );
 }
