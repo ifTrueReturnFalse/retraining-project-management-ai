@@ -1,16 +1,16 @@
 import styles from "./StatusInput.module.css";
 import StatusTag from "@/components/Tags/StatusTag/StatusTag";
-import { Task } from "@/models/tasks.model";
 import { TaskStatusEnum } from "@/schemas/tasks.schema";
 import classNames from "classnames";
 
 interface StatusInputProps {
-  task: Task;
+  value: string
+  onChange: (value: string) => void
 }
 
-export default function StatusInput({ task }: StatusInputProps) {
+export default function StatusInput({ value, onChange }: StatusInputProps) {
   const options = TaskStatusEnum.options;
-  
+
   return (
     <div className={styles.container}>
       <label>Statut :</label>
@@ -19,8 +19,9 @@ export default function StatusInput({ task }: StatusInputProps) {
           <span
             key={option}
             className={classNames(styles.tag, {
-              [styles.selected]: option === task.status,
+              [styles.selected]: option === value,
             })}
+            onClick={() => onChange(option)}
           >
             <StatusTag status={option} />
           </span>

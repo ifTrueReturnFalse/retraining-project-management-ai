@@ -29,10 +29,11 @@ export const TaskApiResponseSchema = createApiResponseSchema(
   }),
 );
 
-export const TaskInputSchema = TaskSchema.pick({
-  title: true,
-  description: true,
-  dueDate: true,
-  assignees: true,
-  status: true,
+export const TaskInputSchema = z.object({
+  title: z.string().min(3, "Le titre doit faire contenir minimum 3 caractères."),
+  description: z.string().min(10, "Merci de fournir des détails sur la tâche."),
+  dueDate: z.string(),
+  status: TaskStatusEnum,
+  priority: TaskPriorityEnum,
+  assigneeIds: z.array(z.string()).min(1, "Assignez la tâche à une personne minimum."),
 });

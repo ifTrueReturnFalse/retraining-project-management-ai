@@ -13,3 +13,8 @@
 .saveButton {
   margin-left: 0;
 }
+
+.error {
+  font-size: 0.8rem;
+  color: red;
+}

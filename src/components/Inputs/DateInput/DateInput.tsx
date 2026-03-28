@@ -1,16 +1,24 @@
 import styles from "./DateInput.module.css";
-import { ISODateToTaskView } from "@/utils/dateManagement";
+import { numericMonthToString } from "@/utils/dateManagement";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
-import { ComponentPropsWithoutRef, useRef } from "react";
+import {
+  ComponentPropsWithoutRef,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 
-export default function DateInput({
-  ...props
-}: ComponentPropsWithoutRef<"input">) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const cleanDate = typeof props.value === "string" ? props.value.split("T")[0] : ""
+export const DateInput = forwardRef<
+  HTMLInputElement,
+  ComponentPropsWithoutRef<"input">
+>((props, ref) => {
+  const localRef = useRef<HTMLInputElement>(null);
+  useImperativeHandle(ref, () => localRef.current!);
 
   const handleDatePicker = () => {
-    inputRef.current?.showPicker();
+    if (localRef.current) {
+      localRef.current.showPicker();
+    }
   };
 
   return (
@@ -19,12 +27,19 @@ export default function DateInput({
       <div className={styles.inputContainer} onClick={handleDatePicker}>
         <div className={styles.text}>
           {typeof props.value === "string" && (
-            <span>{ISODateToTaskView(props.value)}</span>
+            <span>
+              {props.value.split("-")[2]}{" "}
+              {numericMonthToString[parseInt(props.value.split("-")[1])]}
+            </span>
           )}
           <CalendarIcon />
         </div>
-        <input type="date" className={styles.date} {...props} value={cleanDate} ref={inputRef} />
+        <input type="date" ref={localRef} className={styles.date} {...props} />
       </div>
     </div>
   );
-}
+});
+
+DateInput.displayName = "DateInput";
+
+export default DateInput;

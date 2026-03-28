@@ -1,4 +1,4 @@
-const numericMonthToString = [
+export const numericMonthToString = [
   "janvier",
   "février",
   "mars",

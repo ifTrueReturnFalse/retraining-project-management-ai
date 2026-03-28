@@ -9,15 +9,12 @@ import classNames from "classnames";
 
 interface AssigneeInputProps {
   task: Task;
+  selectedIds: string[]
+  onChange: (ids: string[]) => void
 }
 
-export default function AssigneeInput({ task }: AssigneeInputProps) {
+export default function AssigneeInput({ task, selectedIds, onChange }: AssigneeInputProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const [selectedIds, setSelectedIds] = useState<string[]>(
-    task.assignees.map((assignee) => assignee.user.id),
-  );
-
   const { project } = useProjectById(task.project.id);
 
   const projectMembers = useMemo(() => {
@@ -39,7 +36,7 @@ export default function AssigneeInput({ task }: AssigneeInputProps) {
       ? selectedIds.filter((id) => id !== userId)
       : [...selectedIds, userId];
 
-    setSelectedIds(nextIds);
+    onChange(nextIds);
   };
 
   return (
