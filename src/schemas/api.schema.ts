@@ -19,6 +19,8 @@ export const ApiErrorResponseSchema = z.object({
   details: z.array(errorDetails).optional().default([]),
 });
 
+export const ApiMinimalSuccessSchema = ApiSuccessResponseSchema(z.unknown())
+
 export const createApiResponseSchema = <T extends z.ZodType>(dataSchema: T) =>
   z.discriminatedUnion("success", [
     ApiSuccessResponseSchema(dataSchema),

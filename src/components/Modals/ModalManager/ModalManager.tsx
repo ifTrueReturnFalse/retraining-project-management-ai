@@ -11,6 +11,6 @@ export default function ModalManager() {
       return null;
 
     case "TASK_UPDATE":
-      return <BaseModal isOpen={isOpen} onClose={close}><TaskUpdateModal task={data} /></BaseModal>;
+      return <BaseModal isOpen={isOpen} onClose={close}><TaskUpdateModal task={data} closeModal={close} /></BaseModal>;
   }
 }

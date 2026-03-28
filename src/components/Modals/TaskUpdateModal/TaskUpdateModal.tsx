@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./TaskUpdateModal.module.css";
 import TextInput from "@/components/Inputs/TextInput/TextInput";
 import DateInput from "@/components/Inputs/DateInput/DateInput";
@@ -9,12 +11,17 @@ import { useForm, Controller } from "react-hook-form";
 import { TaskInputSchema } from "@/schemas/tasks.schema";
 import { TaskInput } from "@/models/tasks.model";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { TaskService } from "@/services/tasks.service";
+import { useAssignedTasks } from "@/hooks/useTasks";
+import { ApiError } from "@/models/api.model";
+import { useState } from "react";
 
 interface TaskUpdateProps {
   task: Task;
+  closeModal: () => void;
 }
 
-export default function TaskUpdateModal({ task }: TaskUpdateProps) {
+export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
   const {
     register,
     handleSubmit,
@@ -32,15 +39,32 @@ export default function TaskUpdateModal({ task }: TaskUpdateProps) {
     },
   });
 
-  const onSubmit = (data: TaskInput) => {
+  const { refreshTasks } = useAssignedTasks();
+  const [error, setError] = useState("");
+
+  const onSubmit = async (data: TaskInput) => {
+    setError("");
     try {
       const payload = {
         ...data,
         dueDate: new Date(data.dueDate).toISOString(),
       };
-      console.log(payload);
+
+      const response = await TaskService.updateTask(
+        task.project.id,
+        task.id,
+        payload,
+      );
+      if (response.success) {
+        await refreshTasks();
+        closeModal();
+      }
     } catch (error) {
-      console.error(error);
+      if (error instanceof ApiError) {
+        setError(error.message);
+      } else {
+        console.error(error);
+      }
     }
   };
 
@@ -74,7 +98,9 @@ export default function TaskUpdateModal({ task }: TaskUpdateProps) {
               selectedIds={field.value}
               onChange={field.onChange}
             />
-            {fieldState.error && <span className={styles.error}>{fieldState.error.message}</span>}
+            {fieldState.error && (
+              <span className={styles.error}>{fieldState.error.message}</span>
+            )}
           </div>
         )}
       />
@@ -92,6 +118,8 @@ export default function TaskUpdateModal({ task }: TaskUpdateProps) {
         className={styles.saveButton}
         isSubmit={true}
       />
+
+      {error && <span className={styles.error}>{error}</span>}
     </form>
   );
 }

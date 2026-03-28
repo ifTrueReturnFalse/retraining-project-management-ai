@@ -1,28 +1,26 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Project, ProjectApiResponse } from "@/models/project.model";
-import { isAxiosError } from "axios";
 import { externalApi } from "@/lib/axios-server";
+import { NextRequest, NextResponse } from "next/server";
+import { isAxiosError } from "axios";
+import { TaskApiResponse } from "@/models/tasks.model";
 
 type RouteContext = {
-  params: Promise<{ id: Project["id"] }>;
+  params: Promise<{
+    projectId: string;
+    taskId: string;
+  }>;
 };
 
-export async function GET(request: NextRequest, context: RouteContext) {
+export async function PUT(request: NextRequest, context: RouteContext) {
   try {
-    const { id } = await context.params;
+    const { projectId, taskId } = await context.params;
+    const body = await request.json();
     const api = await externalApi();
 
-    if (!id) {
-      return NextResponse.json(
-        { error: "Missing project ID" },
-        { status: 404 },
-      );
-    }
-
-    const { data: payload } = await api.get<ProjectApiResponse>(
-      `/projects/${id}`,
+    const { data: payload } = await api.put<TaskApiResponse>(
+      `/projects/${projectId}/tasks/${taskId}`,
+      body,
     );
-
+    console.log(payload)
     if (!payload.success) {
       return NextResponse.json(payload, { status: 400 });
     }
