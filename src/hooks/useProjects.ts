@@ -15,3 +15,16 @@ export function useProjectById(projectId: BasicProject["id"]) {
     getProject: mutate,
   };
 }
+
+export function useAllContributors() {
+  const { data, isLoading, error, mutate } = useSWR("get-all-users", () =>
+    ProjectService.getAllUsers(),
+  );
+
+  return {
+    users: data,
+    isLoading,
+    error,
+    getAllUsers: mutate,
+  };
+}

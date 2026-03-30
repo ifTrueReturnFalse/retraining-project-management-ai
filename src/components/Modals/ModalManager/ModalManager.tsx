@@ -1,6 +1,7 @@
 import BaseModal from "../BaseModal/BaseModal";
 import { useModalStore } from "@/store/modalStore";
 import TaskUpdateModal from "../TaskUpdateModal/TaskUpdateModal";
+import ProjectCreateModal from "../ProjectCreateModal/ProjectCreateModal";
 
 export default function ModalManager() {
   const { payload, isOpen, close } = useModalStore();
@@ -11,6 +12,17 @@ export default function ModalManager() {
       return null;
 
     case "TASK_UPDATE":
-      return <BaseModal isOpen={isOpen} onClose={close}><TaskUpdateModal task={data} closeModal={close} /></BaseModal>;
+      return (
+        <BaseModal isOpen={isOpen} onClose={close}>
+          <TaskUpdateModal task={data} closeModal={close} />
+        </BaseModal>
+      );
+
+    case "PROJECT_CREATE":
+      return (
+        <BaseModal isOpen={isOpen} onClose={close}>
+          <ProjectCreateModal closeModal={close} />
+        </BaseModal>
+      );
   }
 }

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { UserProfileSchema } from "./auth.schema";
+import { BasicUserProfileSchema } from "./auth.schema";
 import { createApiResponseSchema } from "./api.schema";
 
 export const BasicProjectSchema = z.object({
@@ -12,20 +12,14 @@ export const ProjectMemberSchema = z.object({
   id: z.string(),
   role: z.string(),
   projectId: z.string(),
-  user: UserProfileSchema.omit({
-    createdAt: true,
-    updatedAt: true,
-  }),
+  user: BasicUserProfileSchema,
   userId: z.string(),
   joinedAt: z.iso.datetime(),
 });
 
 export const ProjectSchema = z.object({
   ...BasicProjectSchema.shape,
-  owner: UserProfileSchema.omit({
-    createdAt: true,
-    updatedAt: true,
-  }),
+  owner: BasicUserProfileSchema,
   ownerId: z.string(),
   members: z.array(ProjectMemberSchema),
   createdAt: z.iso.datetime(),
@@ -33,6 +27,19 @@ export const ProjectSchema = z.object({
   userRole: z.string(),
 });
 
+export const AllUsersSearchSchema = z.object({
+  users: z.array(BasicUserProfileSchema),
+});
+
+export const CreateProjectInputSchema = z.object({
+  title: z.string().min(3, "Un titre d'au moins 3 lettres est nécessaire."),
+  description: z.string().min(10, "Une description détaillée est nécessaire."),
+  contributors: z.array(BasicUserProfileSchema.shape.id),
+});
+
 export const ProjectApiResponseSchema = createApiResponseSchema(
   z.object({ project: ProjectSchema }),
 );
+
+export const AllUsersSearchApiResponseSchema =
+  createApiResponseSchema(AllUsersSearchSchema);
