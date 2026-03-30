@@ -20,7 +20,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       `/projects/${projectId}/tasks/${taskId}`,
       body,
     );
-    console.log(payload)
+
     if (!payload.success) {
       return NextResponse.json(payload, { status: 400 });
     }

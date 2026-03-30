@@ -34,6 +34,8 @@ export default function DashboardPage() {
 
   return (
     <>
+      <ModalManager />
+
       <DashProjHead
         title="Tableau de bord"
         description={`Bonjour ${user.name}, voici un aperçu de vos projets et tâches`}
@@ -52,8 +54,6 @@ export default function DashboardPage() {
           ))}
         </div>
       </section>
-
-      <ModalManager />
 
       {viewType === "list" ? (
         <ListView tasks={tasks} />
