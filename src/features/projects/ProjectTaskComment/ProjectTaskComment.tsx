@@ -4,7 +4,7 @@ import UserTag from '@/components/Tags/UserTag/UserTag'
 export default function ProjectTaskComment() {
   return (
     <article className={styles.container}>
-      <UserTag />
+      <UserTag name="AA"  />
       <div className={styles.commentContainer}>
         <div className={styles.commentHead}>
           <p className={styles.user}>User</p>

@@ -6,7 +6,7 @@ export default function ProjectTaskCommentInput() {
   return (
     <div className={styles.container}>
       <div className={styles.inputZone}>
-        <UserTag className={styles.user} />
+        <UserTag className={styles.user} name="AA"  />
         <textarea name="" id="" placeholder="Ajouter un commentaire"></textarea>
       </div>
 

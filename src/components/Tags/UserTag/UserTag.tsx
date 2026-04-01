@@ -1,14 +1,17 @@
 import styles from "./UserTag.module.css";
 import classNames from "classnames";
+import { getInitials } from "@/utils/getInitials";
 
 interface UserTagProps {
   isLeader?: boolean;
   className?: string;
+  name: string;
 }
 
 export default function UserTag({
   isLeader = false,
   className = "",
+  name,
 }: UserTagProps) {
   return (
     <div
@@ -16,7 +19,7 @@ export default function UserTag({
         [styles.leader]: isLeader,
       })}
     >
-      AA
+      {getInitials(name)}
     </div>
   );
 }

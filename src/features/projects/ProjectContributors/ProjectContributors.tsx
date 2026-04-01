@@ -9,12 +9,12 @@ export default function ProjectContributors() {
         Contributeurs <span>3 personnes</span>
       </div>
       <div className={styles.contributorsDetails}>
-        <UserTag isLeader={true} />
+        <UserTag isLeader={true} name="AA" />
         <UserContributorTag isOwner={true} userName="Proprio" />
         
-        <UserTag />
+        <UserTag name="AA" />
         <UserContributorTag userName="Un contributeur" />
-        <UserTag />
+        <UserTag name="AA" />
         <UserContributorTag userName="Un contributeur" />
       </div>
     </div>

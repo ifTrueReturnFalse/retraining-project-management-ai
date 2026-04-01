@@ -38,10 +38,10 @@ export default function ProjectTask() {
         <div className={styles.assignedTo}>
           Assigné à :{" "}
           <span>
-            <UserTag />
+            <UserTag name="AA"  />
             <UserContributorTag userName="Un user" />
             
-            <UserTag />
+            <UserTag name="AA" />
             <UserContributorTag userName="Un user" />
           </span>
         </div>

@@ -8,8 +8,11 @@
   justify-content: center;
   border: 1px solid white;
   font-size: 0.7rem;
+  color: var(--black-metal);
 }
 
 .leader {
   background-color: var(--light-orange);
+  color: var(--orange);
 }
+

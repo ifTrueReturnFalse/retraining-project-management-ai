@@ -38,6 +38,15 @@
   margin-top: 1rem;
 }
 
+.progressor {
+  --progress: 1;
+  min-width: 0.5rem;
+  height: 100%;
+  width: calc(var(--progress) * 100%);
+  background-color: var(--orange);
+  border-radius: 2.5rem;
+}
+
 .tasks {
   color: var(--dark-grey);
   font-size: 0.6rem;
