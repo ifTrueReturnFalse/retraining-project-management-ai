@@ -3,6 +3,7 @@ import { BasicProjectSchema } from "./project.schema";
 import { AssigneeSchema } from "./assignees.schema";
 import { CommentSchema } from "./comments.schema";
 import { createApiResponseSchema } from "./api.schema";
+import { BasicUserProfileSchema } from "./auth.schema";
 
 export const TaskStatusEnum = z.enum(["TODO", "IN_PROGRESS", "DONE"]);
 
@@ -30,10 +31,25 @@ export const TaskApiResponseSchema = createApiResponseSchema(
 );
 
 export const TaskInputSchema = z.object({
-  title: z.string().min(3, "Le titre doit faire contenir minimum 3 caractères."),
+  title: z
+    .string()
+    .min(3, "Le titre doit faire contenir minimum 3 caractères."),
   description: z.string().min(10, "Merci de fournir des détails sur la tâche."),
   dueDate: z.string(),
   status: TaskStatusEnum,
   priority: TaskPriorityEnum,
-  assigneeIds: z.array(z.string()).min(1, "Assignez la tâche à une personne minimum."),
+  assigneeIds: z
+    .array(z.string())
+    .min(1, "Assignez la tâche à une personne minimum."),
 });
+
+export const TasksProjectApiResponseSchema = createApiResponseSchema(
+  z.object({
+    tasks: z.array(
+      TaskSchema.extend({
+        projectId: z.string(),
+        creator: BasicUserProfileSchema,
+      }),
+    ),
+  }),
+);

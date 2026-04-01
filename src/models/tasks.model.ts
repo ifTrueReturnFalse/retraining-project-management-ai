@@ -5,6 +5,7 @@ import {
   TaskStatusEnum,
   TaskPriorityEnum,
   TaskInputSchema,
+  TasksProjectApiResponseSchema
 } from "@/schemas/tasks.schema";
 
 export type TaskApiResponse = z.infer<typeof TaskApiResponseSchema>;
@@ -27,3 +28,5 @@ export const TaskPriorityLabels: Record<
   MEDIUM: { label: "Moyenne", weight: 1 },
   HIGH: { label: "Haute", weight: 2 },
 };
+
+export type TaskProjectApiResponse = z.infer<typeof TasksProjectApiResponseSchema>

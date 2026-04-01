@@ -47,3 +47,7 @@ export const AllUsersSearchApiResponseSchema =
 export const ProjectCreateApiResponseSchema = createApiResponseSchema(
   z.object({ projectId: z.string() }),
 );
+
+export const ProjectGetAllApiResponseSchema = createApiResponseSchema(
+  z.object({ projects: z.array(ProjectSchema) }),
+);

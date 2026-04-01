@@ -31,6 +31,7 @@ export async function handleRequest<T>(
       }
     }
     if (error instanceof z.ZodError) {
+      console.log(z.treeifyError(error))
       throw new ApiError("Erreur de validation des données API", [], 422);
     }
 

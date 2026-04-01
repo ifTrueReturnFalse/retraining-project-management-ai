@@ -5,6 +5,7 @@ import {
   ProjectApiResponseSchema,
   AllUsersSearchApiResponseSchema,
   ProjectCreateApiResponseSchema,
+  ProjectGetAllApiResponseSchema,
 } from "@/schemas/project.schema";
 
 export const ProjectService = {
@@ -29,9 +30,18 @@ export const ProjectService = {
   createProject: async (data: CreateProjectInput) => {
     const response = await handleRequest(
       internalApi.post("/api/project", data),
-      ProjectCreateApiResponseSchema
+      ProjectCreateApiResponseSchema,
     );
-    
+
     return response;
+  },
+
+  getAllProjects: async () => {
+    const response = await handleRequest(
+      internalApi.get("/api/project"),
+      ProjectGetAllApiResponseSchema,
+    );
+
+    return response.data.projects;
   },
 };

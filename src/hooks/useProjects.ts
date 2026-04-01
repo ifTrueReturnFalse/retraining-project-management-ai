@@ -28,3 +28,16 @@ export function useAllContributors() {
     getAllUsers: mutate,
   };
 }
+
+export function useAllProjects() {
+  const { data, isLoading, error, mutate } = useSWR("get-all-projects", () =>
+    ProjectService.getAllProjects(),
+  );
+
+  return {
+    projects: data,
+    isLoading,
+    error,
+    refreshProject: mutate,
+  };
+}
