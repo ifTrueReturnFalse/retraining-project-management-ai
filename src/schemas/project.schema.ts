@@ -32,7 +32,7 @@ export const AllUsersSearchSchema = z.object({
 });
 
 export const CreateProjectInputSchema = z.object({
-  title: z.string().min(3, "Un titre d'au moins 3 lettres est nécessaire."),
+  name: z.string().min(3, "Un titre d'au moins 3 lettres est nécessaire."),
   description: z.string().min(10, "Une description détaillée est nécessaire."),
   contributors: z.array(BasicUserProfileSchema.shape.id),
 });
@@ -43,3 +43,7 @@ export const ProjectApiResponseSchema = createApiResponseSchema(
 
 export const AllUsersSearchApiResponseSchema =
   createApiResponseSchema(AllUsersSearchSchema);
+
+export const ProjectCreateApiResponseSchema = createApiResponseSchema(
+  z.object({ projectId: z.string() }),
+);

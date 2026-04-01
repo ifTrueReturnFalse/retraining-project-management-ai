@@ -1,3 +1,5 @@
+'use client'
+
 import styles from "./DashProjHead.module.css";
 import Button from "../Inputs/Button/Button";
 import { useModalStore } from "@/store/modalStore";
