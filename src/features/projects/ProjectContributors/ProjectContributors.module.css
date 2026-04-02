@@ -30,3 +30,9 @@
   gap: 0.4rem;
   align-items: center;
 }
+
+.member {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}

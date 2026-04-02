@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./ProjectTask.module.css";
-import Tag from "@/components/Tags/Tag/Tag";
+import StatusTag from "@/components/Tags/StatusTag/StatusTag";
 import UserContributorTag from "@/components/Tags/UserContributorTag/UserContributorTag";
 import UserTag from "@/components/Tags/UserTag/UserTag";
 import CalendarIcon from "@/components/Icons/CalendarIcon";
@@ -11,8 +11,14 @@ import ProjectTaskCommentInput from "../ProjectTaskCommentInput/ProjectTaskComme
 import IconButton from "@/components/Inputs/IconButton/IconButton";
 import { useState } from "react";
 import classNames from "classnames";
+import { Task } from "@/models/tasks.model";
+import { ISODateToTaskView } from "@/utils/dateManagement";
 
-export default function ProjectTask() {
+interface ProjectTaskProps {
+  task: Task;
+}
+
+export default function ProjectTask({ task }: ProjectTaskProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,10 +26,10 @@ export default function ProjectTask() {
       <section className={styles.head}>
         <div className={styles.taskDescription}>
           <div className={styles.titleContainer}>
-            <h2>Nom de la tâche</h2>
-            <Tag>A faire</Tag>
+            <h2>{task.title}</h2>
+            <StatusTag status={task.status} />
           </div>
-          <p>Le descriptif de la tâche à réaliser</p>
+          <p>{task.description}</p>
         </div>
         <IconButton>&bull;&bull;&bull;</IconButton>
       </section>
@@ -32,17 +38,18 @@ export default function ProjectTask() {
         <p className={styles.dueDate}>
           Echéance :{" "}
           <span>
-            <CalendarIcon /> 9 mars
+            <CalendarIcon /> {ISODateToTaskView(task.dueDate)}
           </span>
         </p>
         <div className={styles.assignedTo}>
           Assigné à :{" "}
           <span>
-            <UserTag name="AA"  />
-            <UserContributorTag userName="Un user" />
-            
-            <UserTag name="AA" />
-            <UserContributorTag userName="Un user" />
+            {task.assignees.map((assignee) => (
+              <span key={assignee.userId}>
+                <UserTag name={assignee.user.name} />
+                <UserContributorTag userName={assignee.user.name} />
+              </span>
+            ))}
           </span>
         </div>
       </section>

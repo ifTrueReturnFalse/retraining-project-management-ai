@@ -1,13 +1,20 @@
-import classNames from 'classnames'
-import styles from './IconButton.module.css'
+import classNames from "classnames";
+import styles from "./IconButton.module.css";
+import { ComponentPropsWithoutRef } from "react";
 
-interface IconButtonProps {
-  children: React.ReactNode
-  className?: string
+interface IconButtonProps extends ComponentPropsWithoutRef<"button"> {
+  children: React.ReactNode;
+  className?: string;
 }
 
-export default function IconButton({children, className=""}: IconButtonProps) {
+export default function IconButton({
+  children,
+  className = "",
+  ...props
+}: IconButtonProps) {
   return (
-    <button className={classNames(styles.button, className)}>{children}</button>
-  )
+    <button className={classNames(styles.button, className)} {...props}>
+      {children}
+    </button>
+  );
 }

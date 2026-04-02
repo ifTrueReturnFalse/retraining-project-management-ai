@@ -8,15 +8,24 @@ import { useSearchParams } from "next/navigation";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import SelectInput from "@/components/Inputs/SelectInput/SelectInput";
 import ProjectTask from "../ProjectTask/ProjectTask";
+import { Project } from "@/models/project.model";
+import { useProjectTasks } from "@/hooks/useTasks";
 
 const ChipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
   { text: "Calendrier", value: "calendar", Icon: CalendarIcon },
 ];
 
-export default function ProjectTasksContainer() {
+interface ProjectTasksContainerProps {
+  projectId: Project["id"];
+}
+
+export default function ProjectTasksContainer({
+  projectId,
+}: ProjectTasksContainerProps) {
   const searchParams = useSearchParams();
   const viewType = searchParams.get("view") || "list";
+  const { tasks, isLoading } = useProjectTasks(projectId);
 
   return (
     <section className={styles.container}>
@@ -47,8 +56,9 @@ export default function ProjectTasksContainer() {
       </div>
 
       <div className={styles.tasksContainer}>
-        <ProjectTask />
-        <ProjectTask />
+        {tasks?.map((task) => (
+          <ProjectTask key={task.id} task={task} />
+        ))}
       </div>
     </section>
   );
