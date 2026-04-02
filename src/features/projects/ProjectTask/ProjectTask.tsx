@@ -73,7 +73,7 @@ export default function ProjectTask({ task }: ProjectTaskProps) {
           {task.comments.map((comment) => (
             <ProjectTaskComment key={comment.id} comment={comment} />
           ))}
-          <ProjectTaskCommentInput />
+          <ProjectTaskCommentInput task={task} />
         </div>
       </section>
     </article>

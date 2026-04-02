@@ -23,6 +23,20 @@ export const TaskService = {
       TasksProjectApiResponseSchema,
     );
 
-    return response.data.tasks
+    return response.data.tasks;
+  },
+
+  postComment: async (
+    projectId: Project["id"],
+    taskId: Task["id"],
+    data: string,
+  ) => {
+    const response = await handleRequestWithoutValidation(
+      internalApi.post(`/api/project/${projectId}/tasks/${taskId}/comments`, {
+        content: data,
+      }),
+    );
+
+    return response;
   },
 };

@@ -53,3 +53,10 @@ export const TasksProjectApiResponseSchema = createApiResponseSchema(
     ),
   }),
 );
+
+export const TaskCommentInputSchema = z.object({
+  content: z
+    .string()
+    .min(1, "Veuillez entrer un commentaire valide.")
+    .max(1000, "Ce commentaire est trop long."),
+});
