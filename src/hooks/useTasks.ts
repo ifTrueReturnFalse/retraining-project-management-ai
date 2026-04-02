@@ -23,7 +23,7 @@ export function useProjectTasks(projectId: Project["id"]) {
   );
 
   return {
-    tasks: data,
+    tasks: data || [],
     isLoading,
     error,
     refreshTasks: mutate,

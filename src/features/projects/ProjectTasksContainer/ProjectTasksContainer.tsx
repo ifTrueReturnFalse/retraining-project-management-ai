@@ -10,6 +10,10 @@ import SelectInput from "@/components/Inputs/SelectInput/SelectInput";
 import ProjectTask from "../ProjectTask/ProjectTask";
 import { Project } from "@/models/project.model";
 import { useProjectTasks } from "@/hooks/useTasks";
+import { useSearch } from "@/hooks/useSearch";
+import { Task } from "@/models/tasks.model";
+import { useMemo, useState } from "react";
+import { TaskStatusLabels } from "@/models/tasks.model";
 
 const ChipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
@@ -26,6 +30,18 @@ export default function ProjectTasksContainer({
   const searchParams = useSearchParams();
   const viewType = searchParams.get("view") || "list";
   const { tasks, isLoading } = useProjectTasks(projectId);
+  const [filterStatus, setFilterStatus] = useState("ALL");
+
+  const filterFunction = (task: Task, query: string) =>
+    task.title.toLowerCase().includes(query) ||
+    task.description.toLowerCase().includes(query);
+
+  const { query, setQuery, filteredItems } = useSearch(tasks, filterFunction);
+
+  const statusFilteredTasks = useMemo(() => {
+    if (filterStatus === "ALL") return filteredItems;
+    return filteredItems.filter((item) => item.status === filterStatus);
+  }, [filteredItems, filterStatus]);
 
   return (
     <section className={styles.container}>
@@ -47,16 +63,21 @@ export default function ProjectTasksContainer({
             ))}
           </span>
 
-          <SelectInput>
-            <option value="">Statut</option>
+          <SelectInput value={filterStatus} onChange={(event) => setFilterStatus(event.target.value)}>
+            <option value="ALL">Toutes</option>
+            {Object.entries(TaskStatusLabels).map(([key, label]) => (
+              <option key={key} value={key}>
+                {label}
+              </option>
+            ))}
           </SelectInput>
 
-          <SearchBar />
+          <SearchBar value={query} onChange={setQuery} />
         </div>
       </div>
 
       <div className={styles.tasksContainer}>
-        {tasks?.map((task) => (
+        {statusFilteredTasks?.map((task) => (
           <ProjectTask key={task.id} task={task} />
         ))}
       </div>

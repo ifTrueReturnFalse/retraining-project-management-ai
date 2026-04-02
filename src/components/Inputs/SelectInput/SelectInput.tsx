@@ -1,8 +1,9 @@
 import styles from "./SelectInput.module.css";
 import classNames from "classnames";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
+import { ComponentPropsWithoutRef } from "react";
 
-interface SelectInputProps {
+interface SelectInputProps extends ComponentPropsWithoutRef<"select"> {
   children?: React.ReactNode;
   className?: string;
 }
@@ -10,10 +11,14 @@ interface SelectInputProps {
 export default function SelectInput({
   children,
   className = "",
+  ...props
 }: SelectInputProps) {
   return (
     <span className={styles.container}>
-      <select name="" id="" className={classNames(styles.select, className)}>
+      <select
+        className={classNames(styles.select, className)}
+        {...props}
+      >
         {children}
       </select>
       <ArrowIcon className={styles.arrow} />
