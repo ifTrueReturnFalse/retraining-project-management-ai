@@ -14,6 +14,7 @@ import { useSearch } from "@/hooks/useSearch";
 import { Task } from "@/models/tasks.model";
 import { useMemo, useState } from "react";
 import { TaskStatusLabels } from "@/models/tasks.model";
+import { TaskPriorityLabels } from "@/models/tasks.model";
 
 const ChipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
@@ -39,8 +40,12 @@ export default function ProjectTasksContainer({
   const { query, setQuery, filteredItems } = useSearch(tasks, filterFunction);
 
   const statusFilteredTasks = useMemo(() => {
-    if (filterStatus === "ALL") return filteredItems;
-    return filteredItems.filter((item) => item.status === filterStatus);
+    const unsortedItems = filterStatus === "ALL" ? [...filteredItems] : filteredItems.filter((item) => item.status === filterStatus)
+    return unsortedItems.sort((a, b) => {
+      const priority = TaskPriorityLabels[b.priority].weight - TaskPriorityLabels[a.priority].weight
+      if (priority !== 0) return priority
+      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+    })
   }, [filteredItems, filterStatus]);
 
   return (
