@@ -17,3 +17,8 @@ export function ISODateToTaskView(date: string) {
   const isoDate = new Date(date);
   return isoDate.getDate() + " " + numericMonthToString[isoDate.getMonth()];
 }
+
+export function ISODateToTime(date: string) {
+  const isoDate = new Date(date);
+  return isoDate.getHours() + "h" + isoDate.getMinutes();
+}

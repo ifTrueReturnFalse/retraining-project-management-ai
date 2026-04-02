@@ -61,7 +61,7 @@ export default function ProjectTask({ task }: ProjectTaskProps) {
           })}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <p>Commentaires (1)</p>
+          <p>Commentaires ({task.comments.length})</p>
           <ArrowIcon />
         </div>
 
@@ -70,8 +70,9 @@ export default function ProjectTask({ task }: ProjectTaskProps) {
             [styles.commentsContainerOpen]: isOpen,
           })}
         >
-          <ProjectTaskComment />
-          <ProjectTaskComment />
+          {task.comments.map((comment) => (
+            <ProjectTaskComment key={comment.id} comment={comment} />
+          ))}
           <ProjectTaskCommentInput />
         </div>
       </section>
