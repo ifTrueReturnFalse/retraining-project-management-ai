@@ -2,6 +2,7 @@ import BaseModal from "../BaseModal/BaseModal";
 import { useModalStore } from "@/store/modalStore";
 import TaskUpdateModal from "../TaskUpdateModal/TaskUpdateModal";
 import ProjectCreateModal from "../ProjectCreateModal/ProjectCreateModal";
+import TaskCreateModal from "../TaskCreateModal/TaskCreateModal";
 
 export default function ModalManager() {
   const { payload, isOpen, close } = useModalStore();
@@ -10,6 +11,13 @@ export default function ModalManager() {
   switch (type) {
     case "NONE":
       return null;
+
+    case "TASK_CREATE":
+      return (
+        <BaseModal isOpen={isOpen} onClose={close}>
+          <TaskCreateModal />
+        </BaseModal>
+      );
 
     case "TASK_UPDATE":
       return (
