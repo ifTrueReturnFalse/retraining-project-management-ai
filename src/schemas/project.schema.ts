@@ -34,7 +34,13 @@ export const AllUsersSearchSchema = z.object({
 export const CreateProjectInputSchema = z.object({
   name: z.string().min(3, "Un titre d'au moins 3 lettres est nécessaire."),
   description: z.string().min(10, "Une description détaillée est nécessaire."),
-  contributors: z.array(BasicUserProfileSchema.shape.id),
+  contributors: z.array(z.email()),
+});
+
+export const CreateProjectInputFrontSchema = z.object({
+  name: z.string().min(3, "Un titre d'au moins 3 lettres est nécessaire."),
+  description: z.string().min(10, "Une description détaillée est nécessaire."),
+  contributors: z.array(BasicUserProfileSchema),
 });
 
 export const ProjectApiResponseSchema = createApiResponseSchema(

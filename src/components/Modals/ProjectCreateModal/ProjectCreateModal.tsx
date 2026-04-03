@@ -6,8 +6,8 @@ import Button from "@/components/Inputs/Button/Button";
 import ContributorInput from "@/components/Inputs/MemberInputs/ContributorInput/ContributorInput";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateProjectInput } from "@/models/project.model";
-import { CreateProjectInputSchema } from "@/schemas/project.schema";
+import { CreateProjectInputFront } from "@/models/project.model";
+import { CreateProjectInputFrontSchema } from "@/schemas/project.schema";
 import { useState } from "react";
 import { ProjectService } from "@/services/project.service";
 import { useRouter } from "next/navigation";
@@ -22,8 +22,8 @@ export default function ProjectCreateModal({}: ProjectCreateModalProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<CreateProjectInput>({
-    resolver: zodResolver(CreateProjectInputSchema),
+  } = useForm<CreateProjectInputFront>({
+    resolver: zodResolver(CreateProjectInputFrontSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -33,10 +33,15 @@ export default function ProjectCreateModal({}: ProjectCreateModalProps) {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const onSubmit = async (data: CreateProjectInput) => {
+  const onSubmit = async (data: CreateProjectInputFront) => {
     setError("");
     try {
-      const response = await ProjectService.createProject(data);
+      const { contributors, ...restOfData } = data;
+      const payload = {
+        ...restOfData,
+        contributors: contributors.map((contributor) => contributor.email),
+      };
+      const response = await ProjectService.createProject(payload);
       if (response.success) {
         router.push(`/project/${response.data.projectId}`);
       }
@@ -67,7 +72,7 @@ export default function ProjectCreateModal({}: ProjectCreateModalProps) {
         render={({ field, fieldState }) => (
           <div>
             <ContributorInput
-              selectedIds={field.value}
+              selectedUsers={field.value}
               onChange={field.onChange}
             />
             {fieldState.error && <span>{fieldState.error.message}</span>}

@@ -3,14 +3,15 @@
 import { useMemo } from "react";
 import { useAllContributors } from "@/hooks/useProjects";
 import MemberInput from "../MemberInput/MemberInput";
+import { BasicUserProfile } from "@/models/auth.model";
 
 interface ContributorInputProps {
-  selectedIds: string[];
-  onChange: (ids: string[]) => void;
+  selectedUsers: BasicUserProfile[];
+  onChange: (users: BasicUserProfile[]) => void;
 }
 
 export default function ContributorInput({
-  selectedIds,
+  selectedUsers,
   onChange,
 }: ContributorInputProps) {
   const { users } = useAllContributors();
@@ -23,7 +24,7 @@ export default function ContributorInput({
     <MemberInput
       label="Contributeurs"
       members={allContributors}
-      selectedIds={selectedIds}
+      selectedUsers={selectedUsers}
       onChange={onChange}
     />
   );

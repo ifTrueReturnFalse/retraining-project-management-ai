@@ -5,26 +5,28 @@ import ArrowIcon from "@/components/Icons/ArrowIcon";
 import { BasicUserProfile } from "@/models/auth.model";
 
 interface ContributorInputProps {
-  selectedIds: string[];
-  onChange: (ids: string[]) => void;
+  selectedUsers: BasicUserProfile[];
+  onChange: (users: BasicUserProfile[]) => void;
   members: BasicUserProfile[];
   label: string;
 }
 
 export default function MemberInput({
-  selectedIds,
+  selectedUsers,
   onChange,
   members,
   label,
 }: ContributorInputProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggle = (userId: string) => {
-    const nextIds = selectedIds.includes(userId)
-      ? selectedIds.filter((id) => id !== userId)
-      : [...selectedIds, userId];
+  const handleToggle = (user: BasicUserProfile) => {
+    const isAlreadySelected = selectedUsers.some((u) => u.id === user.id)
 
-    onChange(nextIds);
+    const nextUsers = isAlreadySelected
+      ? selectedUsers.filter((u) => u.id !== user.id)
+      : [...selectedUsers, user];
+
+    onChange(nextUsers);
   };
 
   return (
@@ -39,9 +41,9 @@ export default function MemberInput({
           onClick={() => setIsOpen(!isOpen)}
         >
           <span>
-            {selectedIds.length === 0
+            {selectedUsers.length === 0
               ? "Choisir un ou plusieurs collaborateurs"
-              : `${selectedIds.length} collaborateurs`}
+              : `${selectedUsers.length} collaborateurs`}
           </span>
           <ArrowIcon />
         </div>
@@ -49,14 +51,14 @@ export default function MemberInput({
         {isOpen && (
           <ul className={styles.membersContainer}>
             {members.map((member) => {
-              const isSelected = selectedIds.includes(member.id);
+              const isSelected = selectedUsers.some((user) => user.id === member.id);
 
               return (
                 <li
                   key={member.id}
                   value=""
                   className={classNames({ [styles.isSelected]: isSelected })}
-                  onClick={() => handleToggle(member.id)}
+                  onClick={() => handleToggle(member)}
                 >
                   <span>{member.name}</span>
                 </li>

@@ -4,16 +4,17 @@ import { useMemo } from "react";
 import { Task } from "@/models/tasks.model";
 import { useProjectById } from "@/hooks/useProjects";
 import MemberInput from "../MemberInput/MemberInput";
+import { BasicUserProfile } from "@/models/auth.model";
 
 interface AssigneeInputProps {
   task: Task;
-  selectedIds: string[];
-  onChange: (ids: string[]) => void;
+  selectedUsers: BasicUserProfile[];
+  onChange: (users: BasicUserProfile[]) => void;
 }
 
 export default function AssigneeInput({
   task,
-  selectedIds,
+  selectedUsers,
   onChange,
 }: AssigneeInputProps) {
   const { project } = useProjectById(task.project.id);
@@ -36,7 +37,7 @@ export default function AssigneeInput({
     <MemberInput
       label="Assigné à :"
       members={projectMembers}
-      selectedIds={selectedIds}
+      selectedUsers={selectedUsers}
       onChange={onChange}
     />
   );

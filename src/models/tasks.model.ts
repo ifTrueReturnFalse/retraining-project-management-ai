@@ -6,7 +6,8 @@ import {
   TaskPriorityEnum,
   TaskInputSchema,
   TasksProjectApiResponseSchema,
-  TaskCommentInputSchema
+  TaskCommentInputSchema,
+  TaskInputFrontSchema
 } from "@/schemas/tasks.schema";
 
 export type TaskApiResponse = z.infer<typeof TaskApiResponseSchema>;
@@ -14,6 +15,7 @@ export type Task = z.infer<typeof TaskSchema>;
 export type TaskStatus = z.infer<typeof TaskStatusEnum>;
 export type TaskPriority = z.infer<typeof TaskPriorityEnum>;
 export type TaskInput = z.infer<typeof TaskInputSchema>;
+export type TaskInputFront = z.infer<typeof TaskInputFrontSchema>
 
 export const TaskStatusLabels: Record<TaskStatus, string> = {
   TODO: "À faire",

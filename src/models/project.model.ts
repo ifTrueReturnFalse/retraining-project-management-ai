@@ -7,12 +7,14 @@ import {
   AllUsersSearchApiResponseSchema,
   ProjectCreateApiResponseSchema,
   ProjectGetAllApiResponseSchema,
+  CreateProjectInputFrontSchema,
 } from "@/schemas/project.schema";
 
 export type BasicProject = z.infer<typeof BasicProjectSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
 export type ProjectApiResponse = z.infer<typeof ProjectApiResponseSchema>;
 export type CreateProjectInput = z.infer<typeof CreateProjectInputSchema>;
+export type CreateProjectInputFront = z.infer<typeof CreateProjectInputFrontSchema>
 export type AllUsersSearchApiResponse = z.infer<
   typeof AllUsersSearchApiResponseSchema
 >;

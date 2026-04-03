@@ -6,9 +6,9 @@ import DateInput from "@/components/Inputs/DateInput/DateInput";
 import AssigneeInput from "@/components/Inputs/MemberInputs/AssigneeInput/AssigneeInput";
 import StatusInput from "@/components/Inputs/StatusInput/StatusInput";
 import Button from "@/components/Inputs/Button/Button";
-import { Task } from "@/models/tasks.model";
+import { Task, TaskInputFront } from "@/models/tasks.model";
 import { useForm, Controller } from "react-hook-form";
-import { TaskInputSchema } from "@/schemas/tasks.schema";
+import { TaskInputFrontSchema } from "@/schemas/tasks.schema";
 import { TaskInput } from "@/models/tasks.model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TaskService } from "@/services/tasks.service";
@@ -27,14 +27,14 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<TaskInput>({
-    resolver: zodResolver(TaskInputSchema),
+  } = useForm<TaskInputFront>({
+    resolver: zodResolver(TaskInputFrontSchema),
     defaultValues: {
       title: task.title,
       description: task.description,
       dueDate: task.dueDate.split("T")[0],
       status: task.status,
-      assigneeIds: task.assignees.map((assignee) => assignee.user.id),
+      assignees: task.assignees.map((assignee) => assignee.user),
       priority: task.priority,
     },
   });
@@ -42,12 +42,14 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
   const { refreshTasks } = useAssignedTasks();
   const [error, setError] = useState("");
 
-  const onSubmit = async (data: TaskInput) => {
+  const onSubmit = async (data: TaskInputFront) => {
     setError("");
     try {
+      const {assignees, ...restOfData} = data
       const payload = {
-        ...data,
+        ...restOfData,
         dueDate: new Date(data.dueDate).toISOString(),
+        assigneeIds: assignees.map((assignee) => assignee.id)
       };
 
       const response = await TaskService.updateTask(
@@ -90,12 +92,12 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
 
       <Controller
         control={control}
-        name="assigneeIds"
+        name="assignees"
         render={({ field, fieldState }) => (
           <div>
             <AssigneeInput
               task={task}
-              selectedIds={field.value}
+              selectedUsers={field.value}
               onChange={field.onChange}
             />
             {fieldState.error && (
