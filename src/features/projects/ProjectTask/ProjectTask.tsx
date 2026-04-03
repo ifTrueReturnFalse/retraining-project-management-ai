@@ -13,6 +13,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { Task } from "@/models/tasks.model";
 import { ISODateToTaskView } from "@/utils/dateManagement";
+import { useModalStore } from "@/store/modalStore";
 
 interface ProjectTaskProps {
   task: Task;
@@ -20,6 +21,7 @@ interface ProjectTaskProps {
 
 export default function ProjectTask({ task }: ProjectTaskProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const {open} = useModalStore()
 
   return (
     <article className={styles.container}>
@@ -31,7 +33,7 @@ export default function ProjectTask({ task }: ProjectTaskProps) {
           </div>
           <p>{task.description}</p>
         </div>
-        <IconButton>&bull;&bull;&bull;</IconButton>
+        <IconButton onClick={() => open({type: "TASK_UPDATE", data: task})}>&bull;&bull;&bull;</IconButton>
       </section>
 
       <section className={styles.taskDetail}>

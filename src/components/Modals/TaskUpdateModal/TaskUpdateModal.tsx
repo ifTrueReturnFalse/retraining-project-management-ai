@@ -9,10 +9,9 @@ import Button from "@/components/Inputs/Button/Button";
 import { Task, TaskInputFront } from "@/models/tasks.model";
 import { useForm, Controller } from "react-hook-form";
 import { TaskInputFrontSchema } from "@/schemas/tasks.schema";
-import { TaskInput } from "@/models/tasks.model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TaskService } from "@/services/tasks.service";
-import { useAssignedTasks } from "@/hooks/useTasks";
+import { useAssignedTasks, useProjectTasks } from "@/hooks/useTasks";
 import { ApiError } from "@/models/api.model";
 import { useState } from "react";
 
@@ -40,16 +39,17 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
   });
 
   const { refreshTasks } = useAssignedTasks();
+  const { refreshTasks: refreshProjectTask } = useProjectTasks(task.project.id);
   const [error, setError] = useState("");
 
   const onSubmit = async (data: TaskInputFront) => {
     setError("");
     try {
-      const {assignees, ...restOfData} = data
+      const { assignees, ...restOfData } = data;
       const payload = {
         ...restOfData,
         dueDate: new Date(data.dueDate).toISOString(),
-        assigneeIds: assignees.map((assignee) => assignee.id)
+        assigneeIds: assignees.map((assignee) => assignee.id),
       };
 
       const response = await TaskService.updateTask(
@@ -59,6 +59,7 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
       );
       if (response.success) {
         await refreshTasks();
+        await refreshProjectTask()
         closeModal();
       }
     } catch (error) {
