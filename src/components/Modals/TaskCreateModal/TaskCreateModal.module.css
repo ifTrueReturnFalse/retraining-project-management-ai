@@ -3,3 +3,12 @@
   flex-direction: column;
   gap: 2rem;
 }
+
+.addButton {
+  margin-left: 0;
+}
+
+.errors {
+  font-size: 0.8rem;
+  color: red;
+}

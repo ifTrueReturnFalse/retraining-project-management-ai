@@ -1,8 +1,9 @@
 import { Task } from "./tasks.model";
+import { Project } from "./project.model";
 
 export type ModalPayload =
   | { type: "NONE"; data: null }
-  | { type: "TASK_CREATE"; data: null }
+  | { type: "TASK_CREATE"; data: Project }
   | { type: "TASK_CREATE_AI"; data: null }
   | { type: "TASK_UPDATE"; data: Task }
   | { type: "PROJECT_CREATE"; data: null }

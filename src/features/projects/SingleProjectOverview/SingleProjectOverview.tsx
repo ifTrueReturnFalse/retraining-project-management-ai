@@ -28,7 +28,7 @@ export default function SingleProjectOverview({
         <p className={styles.description}>{project.description}</p>
       </div>
       <div className={styles.buttonsContainer}>
-        <Button textButton="Créer une tâche" onClick={() => open({type: "TASK_CREATE", data: null})} />
+        <Button textButton="Créer une tâche" onClick={() => open({type: "TASK_CREATE", data: project})} />
         <AIButton isLarge={true} onClick={() => open({type: "TASK_CREATE_AI", data: null})} />
       </div>
     </div>

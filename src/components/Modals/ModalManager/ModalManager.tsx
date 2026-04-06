@@ -15,7 +15,7 @@ export default function ModalManager() {
     case "TASK_CREATE":
       return (
         <BaseModal isOpen={isOpen} onClose={close}>
-          <TaskCreateModal />
+          <TaskCreateModal project={data} closeModal={close} />
         </BaseModal>
       );
 

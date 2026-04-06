@@ -39,4 +39,12 @@ export const TaskService = {
 
     return response;
   },
+
+  postTask: async (projectId: Project["id"], data: TaskInput) => {
+    const response = await handleRequestWithoutValidation(
+      internalApi.post(`/api/project/${projectId}/tasks`, data),
+    );
+
+    return response;
+  },
 };
