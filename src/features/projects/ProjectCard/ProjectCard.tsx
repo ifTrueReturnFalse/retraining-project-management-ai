@@ -17,7 +17,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const { tasks } = useProjectTasks(project.id);
   const numberOfTasks = tasks?.length || 0;
   const numberOfTasksNotDone =
-    tasks?.filter((task) => task.status !== "DONE").length || 0;
+    numberOfTasks - tasks?.filter((task) => task.status !== "DONE").length || 0;
   const progress = numberOfTasksNotDone / numberOfTasks || 0;
 
   return (
@@ -40,8 +40,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       <p className={styles.tasks}>
-        {tasks?.filter((task) => task.status !== "DONE").length}/{tasks?.length}{" "}
-        tâches terminées
+        {numberOfTasksNotDone}/{tasks?.length} tâches terminées
       </p>
 
       <div className={styles.team}>
