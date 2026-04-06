@@ -15,21 +15,34 @@ export default function SingleProjectOverview({
   project,
 }: SingleProjectOverviewProps) {
   const { open } = useModalStore();
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <div className={styles.head}>
-      <IconButton className={styles.backButton} onClick={() => router.push(routes.PROJECT_LIST)}>&larr;</IconButton>
+      <IconButton
+        className={styles.backButton}
+        onClick={() => router.push(routes.PROJECT_LIST)}
+      >
+        &larr;
+      </IconButton>
       <div className={styles.projectDetail}>
         <div className={styles.titleEdit}>
           <h2>{project.name}</h2>
-          <p>Modifier</p>
+          <p onClick={() => open({ type: "PROJECT_UPDATE", data: project })}>
+            Modifier
+          </p>
         </div>
         <p className={styles.description}>{project.description}</p>
       </div>
       <div className={styles.buttonsContainer}>
-        <Button textButton="Créer une tâche" onClick={() => open({type: "TASK_CREATE", data: project})} />
-        <AIButton isLarge={true} onClick={() => open({type: "TASK_CREATE_AI", data: null})} />
+        <Button
+          textButton="Créer une tâche"
+          onClick={() => open({ type: "TASK_CREATE", data: project })}
+        />
+        <AIButton
+          isLarge={true}
+          onClick={() => open({ type: "TASK_CREATE_AI", data: null })}
+        />
       </div>
     </div>
   );

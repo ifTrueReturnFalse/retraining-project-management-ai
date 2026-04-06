@@ -7,7 +7,7 @@ export type ModalPayload =
   | { type: "TASK_CREATE_AI"; data: null }
   | { type: "TASK_UPDATE"; data: Task }
   | { type: "PROJECT_CREATE"; data: null }
-  | { type: "PROJECT_UPDATE"; data: null }
+  | { type: "PROJECT_UPDATE"; data: Project }
 
 export interface ModalStore {
   payload: ModalPayload;

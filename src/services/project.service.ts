@@ -1,6 +1,11 @@
 import { internalApi } from "@/lib/axios-client";
-import { handleRequest } from "@/lib/handleApi";
-import { BasicProject, CreateProjectInput } from "@/models/project.model";
+import { handleRequest, handleRequestWithoutValidation } from "@/lib/handleApi";
+import {
+  BasicProject,
+  CreateProjectInput,
+  UpdateProjectInput,
+  Project,
+} from "@/models/project.model";
 import {
   ProjectApiResponseSchema,
   AllUsersSearchApiResponseSchema,
@@ -43,5 +48,13 @@ export const ProjectService = {
     );
 
     return response.data.projects;
+  },
+
+  updateProject: async (projectId: Project["id"], data: UpdateProjectInput) => {
+    const response = await handleRequestWithoutValidation(
+      internalApi.put(`/api/project/${projectId}`, data),
+    );
+
+    return response;
   },
 };

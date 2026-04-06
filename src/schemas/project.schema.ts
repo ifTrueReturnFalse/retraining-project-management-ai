@@ -43,6 +43,14 @@ export const CreateProjectInputFrontSchema = z.object({
   contributors: z.array(BasicUserProfileSchema),
 });
 
+export const UpdateProjectInputFrontSchema = CreateProjectInputFrontSchema
+
+export const UpdateProjectInputSchema = z.object({
+  name: z.string().min(3, "Un titre d'au moins 3 lettres est nécessaire."),
+  description: z.string().min(10, "Une description détaillée est nécessaire."),
+  contributors: z.array(z.string()),
+});
+
 export const ProjectApiResponseSchema = createApiResponseSchema(
   z.object({ project: ProjectSchema }),
 );

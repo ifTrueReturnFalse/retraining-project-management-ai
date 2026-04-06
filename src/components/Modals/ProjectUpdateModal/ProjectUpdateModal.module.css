@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.saveButton {
+  margin-left: 0;
+}
+
+.errors {
+  font-size: 0.8rem;
+  color: red;
+}
