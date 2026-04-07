@@ -16,6 +16,17 @@
   margin-bottom: 2.5rem;
 }
 
-.inputContainer div {
-  margin-bottom: 2rem;
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.updateButton {
+  margin-left: 0 !important;
+}
+
+.errors {
+  font-size: 0.8rem;
+  color: red;
 }
