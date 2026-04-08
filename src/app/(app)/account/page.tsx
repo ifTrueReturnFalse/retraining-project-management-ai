@@ -31,9 +31,11 @@ export default function AccountPage() {
       newPasswordVerification: "",
     },
   });
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (data: UserAccountInputFront) => {
     try {
+      setIsLoading(true)
       const { name, familyName, email, oldPassword, newPassword } = data;
 
       if (user.name !== `${name} ${familyName}` || user.email !== email) {
@@ -75,6 +77,8 @@ export default function AccountPage() {
       } else {
         toast.error("Une erreur est survenue lors de la mise à jour de votre profil")
       }
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -130,7 +134,7 @@ export default function AccountPage() {
           error={errors.newPasswordVerification?.message}
         />
 
-        <Button textButton="Modifier les informations" className={styles.updateButton} isSubmit={true}  />
+        <Button textButton="Modifier les informations" className={styles.updateButton} isSubmit={true} disabled={isLoading} />
       </form>
     </section>
   );
