@@ -11,13 +11,14 @@ import { UserAccountInputFrontSchema } from "@/schemas/auth.schema";
 import { ApiError } from "@/models/api.model";
 import { useState } from "react";
 import { authService } from "@/services/auth.client.service";
+import { toast } from "sonner";
 
 export default function AccountPage() {
   const { user, setUser } = useRequiredUser();
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<UserAccountInputFront>({
     resolver: zodResolver(UserAccountInputFrontSchema),
@@ -30,21 +31,12 @@ export default function AccountPage() {
       newPasswordVerification: "",
     },
   });
-  const [globalError, setGlobalError] = useState("");
-  const [profileError, setProfileError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [profileSuccess, setProfileSuccess] = useState("")
-  const [passwordSuccess, setPasswordSuccess] = useState("")
 
   const onSubmit = async (data: UserAccountInputFront) => {
-    setGlobalError("");
-    setProfileSuccess("")
-    setPasswordSuccess("")
     try {
       const { name, familyName, email, oldPassword, newPassword } = data;
 
       if (user.name !== `${name} ${familyName}` || user.email !== email) {
-        setProfileError("");
         const payload = {
           name: `${name} ${familyName}`,
           email,
@@ -54,14 +46,13 @@ export default function AccountPage() {
 
         if (response.success) {
           setUser(response.data.user);
-          alert('Reussi')
+          toast.success("Mise à jour du profil réussie !")
         } else {
-          setProfileError(response.message);
+          toast.error("Echec de la mise à jour du profil")
         }
       }
 
       if (oldPassword.length > 0 && newPassword.length > 0) {
-        setPasswordError("");
         const payload = {
           currentPassword: oldPassword,
           newPassword,
@@ -70,18 +61,19 @@ export default function AccountPage() {
         const response = await authService.updatePassword(payload);
 
         if (!response.success) {
-          setPasswordError(response.message);
+          toast.error(response.message)
         } else {
-          setPasswordSuccess(response.message)
+          toast.success(response.message)
+          setValue("oldPassword", "")
+          setValue("newPassword", "")
+          setValue("newPasswordVerification", "")
         }
       }
     } catch (error) {
       if (error instanceof ApiError) {
-        setGlobalError(error.message);
+        toast.error(error.message)
       } else {
-        setGlobalError(
-          "Une erreur est survenu lors de la mise à jour du profil.",
-        );
+        toast.error("Une erreur est survenue lors de la mise à jour de votre profil")
       }
     }
   };
@@ -114,9 +106,6 @@ export default function AccountPage() {
           error={errors.email?.message}
         />
 
-        {profileSuccess && <span>{profileSuccess}</span>}
-        {profileError && <span>{profileError}</span>}
-
         <TextInput
           label="Ancien mot de passe"
           placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
@@ -141,12 +130,7 @@ export default function AccountPage() {
           error={errors.newPasswordVerification?.message}
         />
 
-        {passwordSuccess && <div>{passwordSuccess}</div>}
-        {passwordError && <div>{passwordError}</div>}
-
         <Button textButton="Modifier les informations" className={styles.updateButton} isSubmit={true}  />
-
-        {globalError && <div className={styles.errors}>{globalError}</div>}
       </form>
     </section>
   );

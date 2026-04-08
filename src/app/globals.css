@@ -32,3 +32,35 @@ body {
 a, a:visited {
   color: var(--orange);
 }
+
+.toast {
+  font-family: var(--font-inter);
+  border-radius: 1rem;
+}
+
+.toast-success {
+  color: var(--black-metal);
+  border-color: var(--orange);
+}
+
+.toast-error {
+  color: var(--light-grey);
+  background-color: var(--orange);
+  border-color: var(--black-metal);
+}
+
+[data-sonner-toast] {
+  font-family: var(--font-inter) !important;
+  border-radius: 1rem !important;
+}
+
+[data-sonner-toast][data-type="success"] {
+  color: var(--black-metal) !important;
+  border-color: var(--orange) !important;
+}
+
+[data-sonner-toast][data-type="error"] {
+  color: var(--light-grey) !important;
+  background-color: var(--orange) !important;
+  border-color: var(--black-metal) !important;
+}

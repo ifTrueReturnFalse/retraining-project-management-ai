@@ -5,6 +5,7 @@ import { UserProvider } from "@/context/UserContext";
 import { cookies } from "next/headers";
 import { authServerService } from "@/services/auth.server.service";
 import KeyboardManager from "@/utils/KeyboardManager";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,6 +43,18 @@ export default async function RootLayout({
     <html lang="fr">
       <body className={`${inter.variable} ${manrope.variable}`}>
         <KeyboardManager />
+        <Toaster
+          expand
+          visibleToasts={3}
+          position="bottom-center"
+          toastOptions={{
+            classNames: {
+              toast: "toast",
+              success: "toast-success",
+              error: "toast-error",
+            },
+          }}
+        />
         <UserProvider initialUser={user}>{children}</UserProvider>
       </body>
     </html>
