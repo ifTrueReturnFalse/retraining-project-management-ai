@@ -7,6 +7,8 @@ import {
   UserAccountInputFrontSchema,
   UserAccountProfileInputSchema,
   UserAccountPasswordInputSchema,
+  UserRegisterInputFrontSchema,
+  UserRegisterInputSchema,
 } from "@/schemas/auth.schema";
 import { z } from "zod";
 
@@ -22,3 +24,5 @@ export type UserAccountProfileInput = z.infer<
 export type UserAccountPasswordInput = z.infer<
   typeof UserAccountPasswordInputSchema
 >;
+export type UserRegisterInputFront = z.infer<typeof UserRegisterInputFrontSchema>
+export type UserRegisterInput = z.infer<typeof UserRegisterInputSchema>

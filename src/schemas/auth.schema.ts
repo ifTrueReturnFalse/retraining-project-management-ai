@@ -66,3 +66,26 @@ export const UserAccountPasswordInputSchema = z.object({
   currentPassword: z.string(),
   newPassword: z.string(),
 });
+
+export const UserRegisterInputFrontSchema = z
+  .object({
+    familyName: z.string().min(1, "Veuillez renseigner votre nom de famille."),
+    name: z.string().min(1, "Veuillez renseigner votre prénom."),
+    email: z.email("Format d'email invalide."),
+    password: z
+      .string()
+      .min(8, "Le mot de passe doit contenir minimum 8 caractères.")
+      .regex(/[A-Z]/, "Il faut au moins une majuscule.")
+      .regex(/[0-9]/, "Il faut au moins un chiffre."),
+    passwordVerification: z.string(),
+  })
+  .refine((data) => data.password === data.passwordVerification, {
+    message: "Les mots de passes ne correspondent pas.",
+    path: ["passwordVerification"],
+  });
+
+export const UserRegisterInputSchema = z.object({
+  name: z.string(),
+  email: z.email(),
+  password: z.string(),
+});

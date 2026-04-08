@@ -7,6 +7,7 @@ import { handleRequest, handleRequestWithoutValidation } from "@/lib/handleApi";
 import {
   UserAccountPasswordInput,
   UserAccountProfileInput,
+  UserRegisterInput,
 } from "@/models/auth.model";
 
 export const authService = {
@@ -17,6 +18,15 @@ export const authService = {
     );
 
     return response.data;
+  },
+
+  register: async (data: UserRegisterInput) => {
+    const response = await handleRequest(
+      internalApi.post("/api/auth/register", data),
+      UserLoginResponseSchema,
+    );
+
+    return response;
   },
 
   logout: async () => {
