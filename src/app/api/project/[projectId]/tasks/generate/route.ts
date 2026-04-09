@@ -1,8 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAxiosError } from "axios";
+import { GenerateTasksInput } from "@/models/tasks.model";
+import { llamaIndexService } from "@/lib/llamaindex";
 
 export async function POST(request: NextRequest) {
   try {
+    const body: GenerateTasksInput = await request.json();
+
+    const { project, tasks, userRequest } = body;
+
+    if (!project || !userRequest) {
+      return NextResponse.json(
+        { message: "Un prompt et un projet sont requis" },
+        { status: 400 },
+      );
+    }
+
+    await llamaIndexService.indexProjectContext({ project, tasks });
+
+    const response = await llamaIndexService.generateTasks(userRequest);
+
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
     if (isAxiosError(error)) {
       const errorData = error.response?.data;

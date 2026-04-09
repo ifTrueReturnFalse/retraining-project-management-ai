@@ -1,0 +1,46 @@
+.container {
+  border: 1px solid var(--light-grey);
+  border-radius: 0.8rem;
+  padding: 1.5rem 2.5rem;
+  max-width: 98%;
+}
+
+.taskDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-manrope);
+  font-size: 1.2rem;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: var(--medium-grey);
+}
+
+.input {
+  border: 1px solid var(--light-grey);
+  border-radius: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  color: var(--dark-grey);
+}
+
+.tools {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  color: var(--medium-grey);
+  font-size: 0.8rem;
+}
+
+.tool {
+  cursor: pointer;
+}
+
+.modify {
+  color: var(--dark-grey);
+}

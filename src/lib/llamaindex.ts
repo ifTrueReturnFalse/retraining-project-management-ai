@@ -1,3 +1,5 @@
+import "server-only"
+
 import {
   VectorStoreIndex,
   Document,
@@ -9,23 +11,20 @@ import {
   MistralAIEmbedding,
   MistralAIEmbeddingModelType,
 } from "@llamaindex/mistral";
-import { Task, GeneratedTasksResponse } from "@/models/tasks.model";
-import { Project } from "@/models/project.model";
+import { GeneratedTasksResponse, TaskGenerationLlama } from "@/models/tasks.model";
 import { ApiError } from "@/models/api.model";
 
-interface TaskGenerationProps {
-  project: Project;
-  tasks: Task[];
-}
+const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
+if (!MISTRAL_API_KEY) throw new Error("MISTRAL_API_KEY missing");
 
 Settings.llm = new MistralAI({
   model: "mistral-large-latest",
-  apiKey: process.env.MISTRAL_API_KEY!,
+  apiKey: process.env.MISTRAL_API_KEY,
 });
 
 Settings.embedModel = new MistralAIEmbedding({
   model: MistralAIEmbeddingModelType.MISTRAL_EMBED,
-  apiKey: process.env.MISTRAL_API_KEY!,
+  apiKey: process.env.MISTRAL_API_KEY,
 });
 
 Settings.nodeParser = new SentenceSplitter({
@@ -36,7 +35,7 @@ Settings.nodeParser = new SentenceSplitter({
 class LlamaIndexService {
   private index: VectorStoreIndex | null = null;
 
-  async indexProjectContext(data: TaskGenerationProps) {
+  async indexProjectContext(data: TaskGenerationLlama) {
     const documents: Document[] = [];
 
     documents.push(

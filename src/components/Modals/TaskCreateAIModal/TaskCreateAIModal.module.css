@@ -5,6 +5,10 @@
   height: 100%;
 }
 
+.container h2 {
+  margin-bottom: 2rem;
+}
+
 .star {
   fill: var(--orange);
   height: 1rem;
@@ -13,4 +17,14 @@
 
 .chatContainer {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.addButton {
+  min-height: 3rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }

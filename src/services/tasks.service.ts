@@ -1,8 +1,12 @@
 import { internalApi } from "@/lib/axios-client";
 import { handleRequest, handleRequestWithoutValidation } from "@/lib/handleApi";
-import { Task, TaskInput } from "@/models/tasks.model";
+import { GeneratedTasksResponse, GenerateTasksInput, Task, TaskInput } from "@/models/tasks.model";
 import { Project } from "@/models/project.model";
-import { TasksProjectApiResponseSchema } from "@/schemas/tasks.schema";
+import {
+  GeneratedTasksResponseSchema,
+  TasksProjectApiResponseSchema,
+} from "@/schemas/tasks.schema";
+import { z } from "zod";
 
 export const TaskService = {
   updateTask: async (
@@ -46,5 +50,23 @@ export const TaskService = {
     );
 
     return response;
+  },
+
+  generateTasks: async (data: GenerateTasksInput): Promise<GeneratedTasksResponse> => {
+    const response = await internalApi.post(
+      `/api/project/${data.project.id}/tasks/generate`,
+      data,
+    );
+
+    const safedParsed = z.safeParse(
+      GeneratedTasksResponseSchema,
+      response.data,
+    );
+
+    if (safedParsed.success) {
+      return response.data;
+    } else {
+      throw new Error("Le format reçu ne correspond pas");
+    }
   },
 };

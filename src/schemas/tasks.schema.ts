@@ -73,3 +73,16 @@ export const TaskCommentInputSchema = z.object({
     .min(1, "Veuillez entrer un commentaire valide.")
     .max(1000, "Ce commentaire est trop long."),
 });
+
+export const GeneratedTaskSchema = TaskSchema.pick({
+  title: true,
+  description: true,
+  dueDate: true,
+  status: true,
+  priority: true,
+});
+
+export const GeneratedTasksResponseSchema = z.object({
+  tasks: z.array(GeneratedTaskSchema),
+});
+
