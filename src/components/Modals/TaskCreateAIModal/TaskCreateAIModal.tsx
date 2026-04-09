@@ -20,7 +20,7 @@ export default function TaskCreateAIModal({ project }: TaskCreateAIModalProps) {
 
       <div className={styles.chatContainer}></div>
 
-      <AITextInput />
+      <AITextInput disabled={isLoading} />
     </form>
   );
 }

@@ -34,3 +34,13 @@ export const TaskPriorityLabels: Record<
 
 export type TaskProjectApiResponse = z.infer<typeof TasksProjectApiResponseSchema>
 export type TaskCommentInput = z.infer<typeof TaskCommentInputSchema>
+
+export interface GeneratedTasksResponse {
+  tasks: {
+    title: string;
+    description: string;
+    dueDate: string;
+    status: "TODO" | "IN_PROGRESS" | "DONE";
+    priority: "LOW" | "MEDIUM" | "HIGH";
+  }[];
+}
