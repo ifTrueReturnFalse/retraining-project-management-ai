@@ -41,7 +41,7 @@ export default function SingleProjectOverview({
         />
         <AIButton
           isLarge={true}
-          onClick={() => open({ type: "TASK_CREATE_AI", data: null })}
+          onClick={() => open({ type: "TASK_CREATE_AI", data: project })}
         />
       </div>
     </div>

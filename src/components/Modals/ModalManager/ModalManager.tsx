@@ -4,6 +4,7 @@ import TaskUpdateModal from "../TaskUpdateModal/TaskUpdateModal";
 import ProjectCreateModal from "../ProjectCreateModal/ProjectCreateModal";
 import TaskCreateModal from "../TaskCreateModal/TaskCreateModal";
 import ProjectUpdateModal from "../ProjectUpdateModal/ProjectUpdateModal";
+import TaskCreateAIModal from "../TaskCreateAIModal/TaskCreateAIModal";
 
 export default function ModalManager() {
   const { payload, isOpen, close } = useModalStore();
@@ -39,6 +40,13 @@ export default function ModalManager() {
         <BaseModal isOpen={isOpen} onClose={close}>
           <ProjectUpdateModal project={data} closeModal={close} />
         </BaseModal>
-      )
+      );
+
+    case "TASK_CREATE_AI":
+      return (
+        <BaseModal isOpen={isOpen} onClose={close}>
+          <TaskCreateAIModal project={data} />
+        </BaseModal>
+      );
   }
 }

@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #F9FAFB;
+  border-radius: 5rem;
+  padding: 1rem 2rem;
+}
+
+.container input {
+  border: none;
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+}
+
+.starContainer {
+  background-color: var(--orange);
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star {
+  fill: white;
+  left: 1px;
+  top: 1px;
+  position: relative;
+  transform: translate(-0.5px, -0.5px);
+}

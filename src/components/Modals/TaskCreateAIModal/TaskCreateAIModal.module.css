@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.star {
+  fill: var(--orange);
+  height: 1rem;
+  width: 1rem;
+}
+
+.chatContainer {
+  flex: 1;
+}

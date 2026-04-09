@@ -4,6 +4,7 @@
   margin: auto;
   border: none;
   border-radius: 0.6rem;
+  height: auto;
 }
 
 .container::backdrop {
