@@ -44,8 +44,7 @@ export default async function RootLayout({
       <body className={`${inter.variable} ${manrope.variable}`}>
         <KeyboardManager />
         <Toaster
-          expand
-          visibleToasts={3}
+          visibleToasts={5}
           position="bottom-center"
           toastOptions={{
             classNames: {
