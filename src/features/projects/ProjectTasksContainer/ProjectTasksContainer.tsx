@@ -15,6 +15,7 @@ import { Task } from "@/models/tasks.model";
 import { useMemo, useState } from "react";
 import { TaskStatusLabels } from "@/models/tasks.model";
 import { TaskPriorityLabels } from "@/models/tasks.model";
+import { toast } from "sonner";
 
 const ChipsOptions = [
   { text: "Liste", value: "list", Icon: TaskIcon },
@@ -40,12 +41,17 @@ export default function ProjectTasksContainer({
   const { query, setQuery, filteredItems } = useSearch(tasks, filterFunction);
 
   const statusFilteredTasks = useMemo(() => {
-    const unsortedItems = filterStatus === "ALL" ? [...filteredItems] : filteredItems.filter((item) => item.status === filterStatus)
+    const unsortedItems =
+      filterStatus === "ALL"
+        ? [...filteredItems]
+        : filteredItems.filter((item) => item.status === filterStatus);
     return unsortedItems.sort((a, b) => {
-      const priority = TaskPriorityLabels[b.priority].weight - TaskPriorityLabels[a.priority].weight
-      if (priority !== 0) return priority
-      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
-    })
+      const priority =
+        TaskPriorityLabels[b.priority].weight -
+        TaskPriorityLabels[a.priority].weight;
+      if (priority !== 0) return priority;
+      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    });
   }, [filteredItems, filterStatus]);
 
   return (
@@ -58,17 +64,28 @@ export default function ProjectTasksContainer({
 
         <div className={styles.controls}>
           <span>
-            {ChipsOptions.map((option) => (
-              <Chips
-                key={option.value}
-                text={option.text}
-                Icon={option.Icon}
-                isActive={viewType === option.value}
-              />
-            ))}
+            {ChipsOptions.map((option) => {
+              return (
+                <Chips
+                  key={option.value}
+                  text={option.text}
+                  Icon={option.Icon}
+                  isActive={viewType === option.value}
+                  onClick={() => {
+                    if (option.value === "calendar")
+                      toast.message(
+                        "Cette fonctionnalité n'est pas encore disponible",
+                      );
+                  }}
+                />
+              );
+            })}
           </span>
 
-          <SelectInput value={filterStatus} onChange={(event) => setFilterStatus(event.target.value)}>
+          <SelectInput
+            value={filterStatus}
+            onChange={(event) => setFilterStatus(event.target.value)}
+          >
             <option value="ALL">Toutes</option>
             {Object.entries(TaskStatusLabels).map(([key, label]) => (
               <option key={key} value={key}>
