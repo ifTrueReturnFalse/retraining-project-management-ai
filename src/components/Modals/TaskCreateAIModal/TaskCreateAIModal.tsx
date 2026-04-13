@@ -6,19 +6,26 @@ import AITextInput from "@/components/Inputs/AITextInput/AITextInput";
 import { useState } from "react";
 import { TaskService } from "@/services/tasks.service";
 import { toast } from "sonner";
-import { GeneratedTask } from "@/models/tasks.model";
+import { GeneratedTask, TaskInput } from "@/models/tasks.model";
 import AITask from "@/components/AITask/AITask";
 import Button from "@/components/Inputs/Button/Button";
+import { useRequiredUser } from "@/context/UserContext";
 
 interface TaskCreateAIModalProps {
   project: Project;
+  closeModal: () => void;
 }
 
-export default function TaskCreateAIModal({ project }: TaskCreateAIModalProps) {
+export default function TaskCreateAIModal({
+  project,
+  closeModal,
+}: TaskCreateAIModalProps) {
   const { tasks, isLoading, refreshTasks } = useProjectTasks(project.id);
   const [prompt, setPrompt] = useState("");
   const [generatingTasks, setGeneratingTasks] = useState(false);
   const [generatedTasks, setGeneratedTasks] = useState<GeneratedTask[]>([]);
+  const { user } = useRequiredUser();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,6 +62,42 @@ export default function TaskCreateAIModal({ project }: TaskCreateAIModalProps) {
     );
   };
 
+  const submitTasks = async () => {
+    if (generatedTasks.length === 0) {
+      toast.error("Pas de tâches à ajouter");
+      return;
+    }
+
+    setIsSubmitting(true);
+    const promises = generatedTasks.map(async (task) => {
+      const payload: TaskInput = {
+        ...task,
+        assigneeIds: [user.id],
+      };
+
+      const response = await TaskService.postTask(project.id, payload);
+
+      if (!response.success) {
+        throw new Error(`Echec pour : ${task.title}`);
+      }
+
+      return task;
+    });
+
+    try {
+      await Promise.all(promises);
+      toast.success("Toutes les tâches ont été ajoutées");
+      setGeneratedTasks([]);
+      refreshTasks();
+      closeModal();
+    } catch {
+      toast.error("Certaines tâches n'ont pas pu être ajoutées");
+      refreshTasks();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <form className={styles.container} onSubmit={(event) => onSubmit(event)}>
       <h2>
@@ -65,7 +108,7 @@ export default function TaskCreateAIModal({ project }: TaskCreateAIModalProps) {
       <div className={styles.chatContainer}>
         {generatedTasks.map((task, i) => (
           <AITask
-            key={crypto.randomUUID()}
+            key={task.title}
             task={task}
             updateTask={(updatedTask) => updateTask(i, updatedTask)}
             deleteTask={() => deleteTask(i)}
@@ -76,6 +119,8 @@ export default function TaskCreateAIModal({ project }: TaskCreateAIModalProps) {
           <Button
             textButton="+ Ajouter des tâches"
             className={styles.addButton}
+            onClick={() => submitTasks()}
+            disabled={isSubmitting}
           />
         )}
       </div>

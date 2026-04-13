@@ -45,7 +45,7 @@ export default function ModalManager() {
     case "TASK_CREATE_AI":
       return (
         <BaseModal isOpen={isOpen} onClose={close}>
-          <TaskCreateAIModal project={data} />
+          <TaskCreateAIModal project={data} closeModal={close} />
         </BaseModal>
       );
   }
