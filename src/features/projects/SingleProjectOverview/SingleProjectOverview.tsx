@@ -6,6 +6,7 @@ import { Project } from "@/models/project.model";
 import { useModalStore } from "@/store/modalStore";
 import { useRouter } from "next/navigation";
 import routes from "@/utils/routes";
+import { useRequiredUser } from "@/context/UserContext";
 
 interface SingleProjectOverviewProps {
   project: Project;
@@ -16,6 +17,7 @@ export default function SingleProjectOverview({
 }: SingleProjectOverviewProps) {
   const { open } = useModalStore();
   const router = useRouter();
+  const { user } = useRequiredUser();
 
   return (
     <div className={styles.head}>
@@ -28,9 +30,11 @@ export default function SingleProjectOverview({
       <div className={styles.projectDetail}>
         <div className={styles.titleEdit}>
           <h2>{project.name}</h2>
-          <p onClick={() => open({ type: "PROJECT_UPDATE", data: project })}>
-            Modifier
-          </p>
+          {user.id === project.ownerId && (
+            <p onClick={() => open({ type: "PROJECT_UPDATE", data: project })}>
+              Modifier
+            </p>
+          )}
         </div>
         <p className={styles.description}>{project.description}</p>
       </div>
