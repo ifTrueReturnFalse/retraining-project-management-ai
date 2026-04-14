@@ -4,7 +4,7 @@
   height: 3rem;
   width: 13.5rem;
   border-radius: 0.5rem;
-  border: none;
+  border: 1px solid var(--black-metal);
   margin: auto;
   cursor: pointer;
   transition: all 0.3s ease-in-out;

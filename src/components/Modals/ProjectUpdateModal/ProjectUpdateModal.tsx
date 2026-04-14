@@ -10,6 +10,10 @@ import { useState } from "react";
 import { ApiError } from "@/models/api.model";
 import { ProjectService } from "@/services/project.service";
 import { useProjectById } from "@/hooks/useProjects";
+import classNames from "classnames";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import routes from "@/utils/routes";
 
 interface ProjectUpdateModalProps {
   project: Project;
@@ -36,6 +40,7 @@ export default function ProjectUpdateModal({
 
   const [error, setError] = useState("");
   const { getProject } = useProjectById(project.id);
+  const router = useRouter();
 
   const onSubmit = async (data: UpdateProjectInputFront) => {
     setError("");
@@ -49,7 +54,7 @@ export default function ProjectUpdateModal({
 
       if (response.success) {
         getProject();
-        closeModal()
+        closeModal();
       }
     } catch (error) {
       if (error instanceof ApiError) {
@@ -57,6 +62,15 @@ export default function ProjectUpdateModal({
       } else {
         console.error(error);
       }
+    }
+  };
+
+  const deleteProject = async () => {
+    try {
+      ProjectService.deleteProject(project.id);
+      router.push(routes.PROJECT_LIST)
+    } catch {
+      toast.error("Une erreur est survenu lors de la suppression du projet")
     }
   };
 
@@ -92,11 +106,19 @@ export default function ProjectUpdateModal({
         )}
       />
 
-      <Button
-        textButton="Enregistrer"
-        isSubmit={true}
-        className={styles.saveButton}
-      />
+      <div className={styles.buttonsContainer}>
+        <Button
+          textButton="Enregistrer"
+          isSubmit={true}
+          className={classNames(styles.saveButton, styles.button)}
+        />
+
+        <Button
+          textButton="Supprimer le projet"
+          className={classNames(styles.deleteButton, styles.button)}
+          onClick={() => deleteProject()}
+        />
+      </div>
 
       {error && <span className={styles.errors}>{error}</span>}
     </form>

@@ -57,4 +57,12 @@ export const ProjectService = {
 
     return response;
   },
+
+  deleteProject: async (projectId: Project["id"]) => {
+    const response = await handleRequestWithoutValidation(
+      internalApi.delete(`/api/project/${projectId}`),
+    );
+
+    return response;
+  },
 };

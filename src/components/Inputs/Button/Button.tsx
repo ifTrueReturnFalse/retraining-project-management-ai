@@ -17,8 +17,8 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-    {...props}  
-    className={`${styles.button} ${className}`}
+      {...props}
+      className={`${styles.button} ${className}`}
       type={isSubmit ? "submit" : "button"}
       disabled={disabled}
     >

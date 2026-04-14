@@ -4,8 +4,31 @@
   gap: 2rem;
 }
 
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.button {
+  width: fit-content !important;
+  padding: 0 1rem;
+}
+
 .saveButton {
-  margin-left: 0;
+  margin-left: 0 !important;
+}
+
+.deleteButton {
+  background-color: red !important;
+  margin-right: 0 !important;
+  border: 1px solid red !important;
+}
+
+.deleteButton:hover {
+  background-color: white !important;
+  color: red !important;
+  border-color: red !important;
 }
 
 .errors {
