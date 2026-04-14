@@ -74,7 +74,7 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
 
   const deleteTask = async () => {
     try {
-      TaskService.deleteTask(task.project.id, task.id);
+      await TaskService.deleteTask(task.project.id, task.id);
       await refreshTasks();
       await refreshProjectTask();
       closeModal();

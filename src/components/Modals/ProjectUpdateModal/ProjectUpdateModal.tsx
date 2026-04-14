@@ -67,7 +67,7 @@ export default function ProjectUpdateModal({
 
   const deleteProject = async () => {
     try {
-      ProjectService.deleteProject(project.id);
+      await ProjectService.deleteProject(project.id);
       router.push(routes.PROJECT_LIST)
     } catch {
       toast.error("Une erreur est survenu lors de la suppression du projet")
