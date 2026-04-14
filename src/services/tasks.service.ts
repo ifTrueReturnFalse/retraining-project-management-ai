@@ -1,6 +1,11 @@
 import { internalApi } from "@/lib/axios-client";
 import { handleRequest, handleRequestWithoutValidation } from "@/lib/handleApi";
-import { GeneratedTasksResponse, GenerateTasksInput, Task, TaskInput } from "@/models/tasks.model";
+import {
+  GeneratedTasksResponse,
+  GenerateTasksInput,
+  Task,
+  TaskInput,
+} from "@/models/tasks.model";
 import { Project } from "@/models/project.model";
 import {
   GeneratedTasksResponseSchema,
@@ -52,7 +57,9 @@ export const TaskService = {
     return response;
   },
 
-  generateTasks: async (data: GenerateTasksInput): Promise<GeneratedTasksResponse> => {
+  generateTasks: async (
+    data: GenerateTasksInput,
+  ): Promise<GeneratedTasksResponse> => {
     const response = await internalApi.post(
       `/api/project/${data.project.id}/tasks/generate`,
       data,
@@ -68,5 +75,13 @@ export const TaskService = {
     } else {
       throw new Error("Le format reçu ne correspond pas");
     }
+  },
+
+  deleteTask: async (projectId: Project["id"], taskId: Task["id"]) => {
+    const response = await handleRequestWithoutValidation(
+      internalApi.delete(`/api/project/${projectId}/tasks/${taskId}`),
+    );
+
+    return response;
   },
 };

@@ -10,8 +10,32 @@
   font-size: 1.5rem;
 }
 
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonsContainer button {
+  width: fit-content;
+  padding: 0 2rem;
+}
+
 .saveButton {
   margin-left: 0;
+}
+
+.deleteButton {
+  background-color: red;
+  border: 1px solid red;
+  margin-right: 0;
+}
+
+.deleteButton:hover {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
 }
 
 .error {

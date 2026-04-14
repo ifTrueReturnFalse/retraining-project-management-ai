@@ -14,6 +14,7 @@ import { TaskService } from "@/services/tasks.service";
 import { useAssignedTasks, useProjectTasks } from "@/hooks/useTasks";
 import { ApiError } from "@/models/api.model";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface TaskUpdateProps {
   task: Task;
@@ -59,7 +60,7 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
       );
       if (response.success) {
         await refreshTasks();
-        await refreshProjectTask()
+        await refreshProjectTask();
         closeModal();
       }
     } catch (error) {
@@ -68,6 +69,17 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
       } else {
         console.error(error);
       }
+    }
+  };
+
+  const deleteTask = async () => {
+    try {
+      TaskService.deleteTask(task.project.id, task.id);
+      await refreshTasks();
+      await refreshProjectTask();
+      closeModal();
+    } catch {
+      toast.error("Un problème est survenu lors de la suppression de la tâche");
     }
   };
 
@@ -116,11 +128,19 @@ export default function TaskUpdateModal({ task, closeModal }: TaskUpdateProps) {
         )}
       />
 
-      <Button
-        textButton="Enregistrer"
-        className={styles.saveButton}
-        isSubmit={true}
-      />
+      <div className={styles.buttonsContainer}>
+        <Button
+          textButton="Enregistrer"
+          className={styles.saveButton}
+          isSubmit={true}
+        />
+
+        <Button
+          textButton="Supprimer la tâche"
+          className={styles.deleteButton}
+          onClick={() => deleteTask()}
+        />
+      </div>
 
       {error && <span className={styles.error}>{error}</span>}
     </form>
