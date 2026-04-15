@@ -1,0 +1,14 @@
+.link {
+  background-color: var(--light-orange);
+  width: 100%;
+  text-decoration: none;
+  border: 1px solid var(--orange);
+  padding: 0.8rem 3rem;
+  border-radius: 0.6rem;
+  box-shadow: 0px 1px 4px -1px rgba(0,0,0,0.6);
+}
+
+.active {
+  background-color: var(--orange);
+  color: white !important;
+}

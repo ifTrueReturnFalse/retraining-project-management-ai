@@ -8,10 +8,71 @@
   padding: 0 6rem;
 }
 
+.largeMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10rem;
+}
+
 .menuItems {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   gap: 2rem;
+}
+
+.burgerMenu {
+  display: none;
+}
+
+.burgerMenuContent {
+  display: grid;
+  grid-template-rows: 0fr;
+  max-width: 0;
+  position: absolute;
+  right: 6rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0.1rem;
+  transition:
+    grid-template-rows 0.3s ease-out,
+    max-width 0.4s ease-out,
+    opacity 0.2s ease;
+}
+
+.burgerMenuContentOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  max-width: 50rem;
+}
+
+.contentWrapper {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+@media (max-width: 1000px) {
+  .largeMenu {
+    display: none;
+  }
+
+  .burgerMenu {
+    display: block;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  .burgerMenuContent {
+    right: 2rem;
+  }
 }

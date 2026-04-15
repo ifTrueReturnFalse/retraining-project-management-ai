@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export interface MenuItemProps {
   text: string;
-  Icon: ElementType;
+  Icon?: ElementType;
   url: string;
   isActive?: boolean;
 }
@@ -23,7 +23,7 @@ export default function MenuItem({
         [styles.isActive]: isActive,
       })}
     >
-      <Icon className={styles.icon} /> <span>{text}</span>
+      {Icon && <Icon className={styles.icon} />} <span>{text}</span>
     </Link>
   );
 }
