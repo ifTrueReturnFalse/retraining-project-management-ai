@@ -26,3 +26,13 @@
   object-fit: cover;
   position: absolute;
 }
+
+@media (max-width: 850px) {
+  .container {
+    justify-content: center;
+  }
+  
+  .backgroundPhoto {
+    display: none;
+  }
+}
