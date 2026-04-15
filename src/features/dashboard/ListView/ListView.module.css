@@ -33,3 +33,14 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+@media (max-width: 700px) {
+  .container {
+    padding: 2rem 2rem;
+  }
+
+  .viewListMenu {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

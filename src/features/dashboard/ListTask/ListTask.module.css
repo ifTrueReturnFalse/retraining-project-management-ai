@@ -6,8 +6,24 @@
   flex-direction: column;
   gap: 1rem;
 }
+.subcontainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0px;
+}
 
-.subcontainer, .detailContainer {
+.subcontainer div:nth-child(2) {
+  max-width: 10rem;
+  justify-self: right;
+}
+
+.subcontainer div:last-child {
+  grid-column: span 2 / span 2;
+  max-width: 50rem;
+}
+
+.detailContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -18,18 +34,12 @@
   gap: 1rem;
 }
 
-.nameDescription {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.nameDescription h3 {
+.title {
   font-family: var(--font-manrope);
   font-size: 1.2rem;
 }
 
-.nameDescription p {
+.description {
   color: var(--medium-grey);
   font-size: 0.9rem;
 }
@@ -59,4 +69,11 @@
 
 .button {
   width: 7.5rem;
+}
+
+@media (max-width: 850px) {
+  .detailContainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

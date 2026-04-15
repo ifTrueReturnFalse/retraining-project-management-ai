@@ -22,3 +22,9 @@
   position: absolute;
   right: 0.2rem;
 }
+
+@media (max-width: 850px) {
+  .container {
+    width: 16rem;
+  }
+}

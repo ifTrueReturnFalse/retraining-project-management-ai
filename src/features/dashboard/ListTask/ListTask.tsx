@@ -24,11 +24,15 @@ export default function ListTask({ kanbanStyle = false, task }: ListTaskProps) {
       })}
     >
       <div className={styles.subcontainer}>
-        <div className={styles.nameDescription}>
-          <h3>{task.title}</h3>
-          <p>{task.description}</p>
+        <div>
+          <h3 className={styles.title}>{task.title}</h3>
         </div>
-        <StatusTag status={task.status} />
+        <div>
+          <StatusTag status={task.status} />
+        </div>
+        <div>
+          <p className={styles.description}>{task.description}</p>
+        </div>
       </div>
 
       <div className={styles.detailContainer}>
