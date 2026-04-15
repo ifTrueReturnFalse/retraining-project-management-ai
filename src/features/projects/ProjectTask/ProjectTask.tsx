@@ -21,7 +21,7 @@ interface ProjectTaskProps {
 
 export default function ProjectTask({ task }: ProjectTaskProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const {open} = useModalStore()
+  const { open } = useModalStore();
 
   return (
     <article className={styles.container}>
@@ -33,7 +33,9 @@ export default function ProjectTask({ task }: ProjectTaskProps) {
           </div>
           <p>{task.description}</p>
         </div>
-        <IconButton onClick={() => open({type: "TASK_UPDATE", data: task})}>&bull;&bull;&bull;</IconButton>
+        <IconButton onClick={() => open({ type: "TASK_UPDATE", data: task })}>
+          &bull;&bull;&bull;
+        </IconButton>
       </section>
 
       <section className={styles.taskDetail}>
@@ -72,10 +74,12 @@ export default function ProjectTask({ task }: ProjectTaskProps) {
             [styles.commentsContainerOpen]: isOpen,
           })}
         >
-          {task.comments.map((comment) => (
-            <ProjectTaskComment key={comment.id} comment={comment} />
-          ))}
-          <ProjectTaskCommentInput task={task} />
+          <div className={styles.commentsContent}>
+            {task.comments.map((comment) => (
+              <ProjectTaskComment key={comment.id} comment={comment} />
+            ))}
+            <ProjectTaskCommentInput task={task} />
+          </div>
         </div>
       </section>
     </article>
