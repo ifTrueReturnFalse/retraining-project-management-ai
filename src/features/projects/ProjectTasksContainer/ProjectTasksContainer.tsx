@@ -82,19 +82,21 @@ export default function ProjectTasksContainer({
             })}
           </span>
 
-          <SelectInput
-            value={filterStatus}
-            onChange={(event) => setFilterStatus(event.target.value)}
-          >
-            <option value="ALL">Toutes</option>
-            {Object.entries(TaskStatusLabels).map(([key, label]) => (
-              <option key={key} value={key}>
-                {label}
-              </option>
-            ))}
-          </SelectInput>
+          <span>
+            <SelectInput
+              value={filterStatus}
+              onChange={(event) => setFilterStatus(event.target.value)}
+            >
+              <option value="ALL">Toutes</option>
+              {Object.entries(TaskStatusLabels).map(([key, label]) => (
+                <option key={key} value={key}>
+                  {label}
+                </option>
+              ))}
+            </SelectInput>
 
-          <SearchBar value={query} onChange={setQuery} />
+            <SearchBar value={query} onChange={setQuery} />
+          </span>
         </div>
       </div>
 

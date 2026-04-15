@@ -16,15 +16,19 @@ export default function ProjectContributors({
         Contributeurs <span>{project.members.length} personnes</span>
       </div>
       <div className={styles.contributorsDetails}>
-        <UserTag isLeader={true} name={project.owner.name} />
-        <UserContributorTag isOwner={true} userName={project.owner.name} />
+        <span className={styles.ownerDetails}>
+          <UserTag isLeader={true} name={project.owner.name} />
+          <UserContributorTag isOwner={true} userName={project.owner.name} />
+        </span>
 
-        {project.members.filter((member) => member.userId !== project.ownerId).map((member) => (
-          <span key={member.id} className={styles.member}>
-            <UserTag name={member.user.name} />
-            <UserContributorTag userName={member.user.name} />
-          </span>
-        ))}
+        {project.members
+          .filter((member) => member.userId !== project.ownerId)
+          .map((member) => (
+            <span key={member.id} className={styles.member}>
+              <UserTag name={member.user.name} />
+              <UserContributorTag userName={member.user.name} />
+            </span>
+          ))}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@
   background-color: transparent;
   border: 1px solid var(--light-grey);
   border-radius: 0.8rem;
+  height: fit-content;
 }
 
 .head {
@@ -80,6 +81,14 @@
   margin-left: 0.5rem;
 }
 
+.assigneesList {
+  display: grid;
+  width: 80%;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, max-content));
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
 .commentSection {
   border-top: 1px solid var(--light-grey);
   margin-top: 1.5rem;
@@ -125,4 +134,32 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .titleContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .taskDescription {
+    gap: 5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem 1.5rem;
+  }
+  
+  .assignedTo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .assigneesList {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }

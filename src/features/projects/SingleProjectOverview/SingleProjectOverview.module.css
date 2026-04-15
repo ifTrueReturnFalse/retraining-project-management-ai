@@ -44,3 +44,32 @@
   align-items: center;
   gap: 0.75rem;
 }
+
+@media (max-width: 850px) {
+  .backButton {
+    top: 7rem;
+    left: 3rem;
+  }
+
+  .buttonsContainer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .head {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+.backButton {
+    top: 7rem;
+    left: 2rem;
+  }
+
+  .buttonsContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

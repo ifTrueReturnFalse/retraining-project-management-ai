@@ -40,21 +40,21 @@ export default function ProjectTask({ task }: ProjectTaskProps) {
 
       <section className={styles.taskDetail}>
         <p className={styles.dueDate}>
-          Echéance :{" "}
+          Echéance :
           <span>
             <CalendarIcon /> {ISODateToTaskView(task.dueDate)}
           </span>
         </p>
         <div className={styles.assignedTo}>
-          Assigné à :{" "}
-          <span>
+          <span>Assigné à :</span>
+          <div className={styles.assigneesList}>
             {task.assignees.map((assignee) => (
               <span key={assignee.userId}>
                 <UserTag name={assignee.user.name} />
                 <UserContributorTag userName={assignee.user.name} />
               </span>
             ))}
-          </span>
+          </div>
         </div>
       </section>
 
