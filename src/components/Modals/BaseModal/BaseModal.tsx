@@ -9,11 +9,13 @@ import { useEffect, useRef } from "react";
 interface BaseModalProps extends ComponentPropsWithoutRef<"dialog"> {
   isOpen: boolean;
   onClose: () => void;
+  isFullHeight?: boolean;
 }
 
 export default function BaseModal({
   isOpen,
   onClose,
+  isFullHeight = false,
   ...props
 }: BaseModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -31,7 +33,9 @@ export default function BaseModal({
 
   return (
     <dialog
-      className={classNames(styles.container, props.className)}
+      className={classNames(styles.container, props.className, {
+        [styles.fullHeight]: isFullHeight,
+      })}
       ref={dialogRef}
       onClose={onClose}
     >
