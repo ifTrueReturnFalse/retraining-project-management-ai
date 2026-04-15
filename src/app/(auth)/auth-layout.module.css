@@ -6,18 +6,23 @@
 }
 
 .formContainer {
-  min-width: 35rem;
+  max-width: 35rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding-top: 6rem;
   padding-bottom: 6rem;
-  gap: 8rem;
+  flex: 1;
 }
 
 .backgroundPhoto {
-  height: 100vh;
+  flex: 1;
   position: relative;
   overflow: hidden;
+}
+
+.backgroundPhoto img {
+  object-fit: cover;
+  position: absolute;
 }
