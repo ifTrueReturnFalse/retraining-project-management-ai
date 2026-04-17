@@ -32,15 +32,15 @@ export default function MenuBar() {
 
   return (
     <nav className={styles.container}>
-      <Image
-        src={"/images/logo/orange-logo.svg"}
-        alt="Logo"
-        width={150}
-        height={20}
-        className={styles.image}
-      />
-
       <div className={styles.largeMenu}>
+        <Image
+          src={"/images/logo/orange-logo.svg"}
+          alt="Logo"
+          width={150}
+          height={20}
+          className={styles.image}
+        />
+
         <nav className={styles.menuItems}>
           {menuItems.map((item) => (
             <MenuItem
@@ -57,6 +57,14 @@ export default function MenuBar() {
       </div>
 
       <div className={styles.burgerMenu}>
+        <Image
+          src={"/images/logo/orange-logo.svg"}
+          alt="Logo"
+          width={150}
+          height={20}
+          className={styles.image}
+        />
+
         <BurgerButton
           isOpen={burgerMenuOpen}
           onClick={() => setBurgerMenuOpen(!burgerMenuOpen)}

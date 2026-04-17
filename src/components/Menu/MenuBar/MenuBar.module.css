@@ -6,6 +6,7 @@
   height: 6rem;
   background-color: white;
   padding: 0 6rem;
+  width: 100%;
 }
 
 .largeMenu {
@@ -13,7 +14,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 10rem;
+  width: 100%;
 }
 
 .menuItems {
@@ -26,6 +27,10 @@
 
 .burgerMenu {
   display: none;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .burgerMenuContent {
@@ -63,7 +68,7 @@
   }
 
   .burgerMenu {
-    display: block;
+    display: flex;
   }
 }
 
