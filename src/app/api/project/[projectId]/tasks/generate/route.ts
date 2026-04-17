@@ -16,9 +16,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await llamaIndexService.indexProjectContext({ project, tasks });
-
-    const response = await llamaIndexService.generateTasks(userRequest);
+    const response = await llamaIndexService.generateTasks(
+      { project, tasks },
+      userRequest,
+    );
 
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
