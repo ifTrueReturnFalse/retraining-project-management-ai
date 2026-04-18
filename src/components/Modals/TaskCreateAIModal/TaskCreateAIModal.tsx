@@ -10,6 +10,7 @@ import { GeneratedTask, TaskInput } from "@/models/tasks.model";
 import AITask from "@/components/AITask/AITask";
 import Button from "@/components/Inputs/Button/Button";
 import { useRequiredUser } from "@/context/UserContext";
+import { ApiError } from "@/models/api.model";
 
 interface TaskCreateAIModalProps {
   project: Project;
@@ -26,10 +27,12 @@ export default function TaskCreateAIModal({
   const [generatedTasks, setGeneratedTasks] = useState<GeneratedTask[]>([]);
   const { user } = useRequiredUser();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const onSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setGeneratingTasks(true);
+    setError("");
     try {
       if (isLoading || prompt.length === 0) return;
 
@@ -41,8 +44,14 @@ export default function TaskCreateAIModal({
 
       setGeneratedTasks(response.tasks);
       setPrompt("");
-    } catch {
-      toast.error("La génération a échoué");
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setError(error.message);
+      } else if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Une erreur est survenue.");
+      }
     } finally {
       setGeneratingTasks(false);
     }
@@ -131,6 +140,8 @@ export default function TaskCreateAIModal({
         value={prompt}
         onChange={(event) => setPrompt(event.target.value)}
       />
+
+      {error && <p></p>}
     </form>
   );
 }

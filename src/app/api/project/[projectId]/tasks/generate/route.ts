@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isAxiosError } from "axios";
 import { GenerateTasksInput } from "@/models/tasks.model";
 import { llamaIndexService } from "@/lib/llamaindex";
+import { ApiError } from "@/models/api.model";
+import { hasStatus } from "@/lib/handleError";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,23 +24,43 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
-    if (isAxiosError(error)) {
-      const errorData = error.response?.data;
-      if (
-        errorData &&
-        typeof errorData === "object" &&
-        "success" in errorData
-      ) {
-        return NextResponse.json(errorData, {
-          status: error.response?.status || 400,
-        });
+    if (error instanceof ApiError) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: error.message,
+          details: error.details,
+        },
+        { status: error.status },
+      );
+    }
+
+    if (hasStatus(error)) {
+      if (error.status === 429) {
+        return NextResponse.json(
+          { success: false, message: "Limite de requêtes Mistral atteinte" },
+          { status: 429 },
+        );
       }
+
+      return NextResponse.json(
+        { success: false, message: error.message || "Erreur API" },
+        { status: error.status },
+      );
+    }
+
+    if (error instanceof Error) {
+      console.error("Crash interne:", error.message);
+      return NextResponse.json(
+        { success: false, message: error.message },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json(
       {
         success: false,
-        message: "Un problème serveur est survenu.",
+        message: "Un problème inconnu est survenu.",
         details: [],
       },
       { status: 500 },
