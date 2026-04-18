@@ -77,3 +77,9 @@ a, a:visited {
     font-size: 12px;
   }
 }
+
+@media (prefers-contrast: more) {
+  a, a:visited {
+    color: var(--black-metal);
+  }
+}

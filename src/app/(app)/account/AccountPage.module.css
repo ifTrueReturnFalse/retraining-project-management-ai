@@ -42,3 +42,9 @@
     padding: 2rem 2rem;
   }
 }
+
+@media (prefers-contrast: more) {
+  .user {
+    color: var(--black-metal);
+  }
+}

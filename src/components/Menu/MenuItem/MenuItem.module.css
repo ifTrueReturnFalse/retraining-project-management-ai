@@ -27,3 +27,12 @@
     fill: white;
 }
 
+@media (prefers-contrast: more) {
+  .container {
+    color: var(--black-metal);
+  }
+
+  .isActive, .isActive:visited {
+    color: white;
+  }
+}

@@ -20,3 +20,9 @@
 .chipsSelected {
   background-color: var(--light-orange);
 }
+
+@media (prefers-contrast: more) {
+  .chips {
+    color: var(--black-metal);
+  }
+}

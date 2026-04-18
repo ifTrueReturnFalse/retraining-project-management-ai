@@ -40,3 +40,9 @@
 .container:hover svg path {
   fill: var(--orange);
 }
+
+@media (prefers-contrast: more) {
+  .container {
+    background-color: var(--black-metal);
+  }
+}

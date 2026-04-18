@@ -7,3 +7,13 @@
   background-color: var(--light-orange);
   color: var(--orange);
 }
+
+@media (prefers-contrast: more) {
+  .baseColor {
+    color: var(--black-metal);
+  }
+
+  .owner {
+    color: var(--black-metal);
+  }
+}

@@ -44,3 +44,9 @@
     gap: 1rem;
   }
 }
+
+@media (prefers-contrast: more) {
+  .viewListMenuText p {
+    color: var(--black-metal);
+  }
+}

@@ -19,3 +19,9 @@
   background-color: var(--orange);
   color: white;
 }
+
+@media (prefers-contrast: more) {
+  .isActive, .isActive:visited {
+    background-color: var(--black-metal);
+  }
+}

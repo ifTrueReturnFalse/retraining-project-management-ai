@@ -77,3 +77,13 @@
     gap: 1rem;
   }
 }
+
+@media (prefers-contrast: more) {
+  .description {
+    color: var(--black-metal);
+  }
+
+  .taskDetail {
+    color: var(--black-metal);
+  }
+}

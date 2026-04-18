@@ -34,7 +34,7 @@ export const DateInput = forwardRef<
           )}
           <CalendarIcon />
         </div>
-        <input type="date" ref={localRef} className={styles.date} {...props} />
+        <input type="date" ref={localRef} className={styles.date} aria-label="Sélectionner une date" {...props} />
       </div>
     </div>
   );

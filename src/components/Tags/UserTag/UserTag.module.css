@@ -16,3 +16,8 @@
   color: var(--orange);
 }
 
+@media (prefers-contrast: more) {
+  .leader {
+    color: var(--black-metal);
+  }
+}

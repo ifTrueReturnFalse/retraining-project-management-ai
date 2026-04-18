@@ -12,3 +12,9 @@
   background-color: #F1FFF7;
   color: #27AE60;
 }
+
+@media (prefers-contrast: more) {
+  .todo, .inprogress, .done {
+    color: var(--black-metal);
+  }
+}

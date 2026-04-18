@@ -29,3 +29,9 @@
 .comment {
   font-size: 0.8rem;
 }
+
+@media (prefers-contrast: more) {
+  .date {
+    color: var(--black-metal);
+  }
+}

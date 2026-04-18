@@ -91,3 +91,9 @@
 .invited:not(:first-child) {
   margin-left: -0.5rem;
 }
+
+@media (prefers-contrast: more) {
+  .owner {
+    color: var(--black-metal);
+  }
+}

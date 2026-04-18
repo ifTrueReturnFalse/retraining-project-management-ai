@@ -138,6 +138,7 @@ export default function TaskCreateAIModal({
         disabled={isLoading || generatingTasks}
         isLoading={generatingTasks}
         value={prompt}
+        aria-label="Décrivez les tâches que vous souhaitez ajouter"
         onChange={(event) => setPrompt(event.target.value)}
       />
 

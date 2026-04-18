@@ -44,3 +44,17 @@
 .modify {
   color: var(--dark-grey);
 }
+
+@media (prefers-contrast: more) {
+  .description {
+    color: var(--black-metal);
+  }
+  
+  .tools {
+    color: var(--black-metal);
+  }
+
+  .modify {
+    color: var(--black-metal);
+  }
+}
