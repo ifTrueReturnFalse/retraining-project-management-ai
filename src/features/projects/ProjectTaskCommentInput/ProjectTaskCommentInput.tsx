@@ -55,6 +55,7 @@ export default function ProjectTaskCommentInput({
         <UserTag className={styles.user} name={user.name} />
         <textarea
           placeholder="Ajouter un commentaire"
+          aria-label="Ajouter un commentaire"
           {...register("content")}
         ></textarea>
       </div>

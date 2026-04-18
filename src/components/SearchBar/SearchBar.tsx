@@ -17,8 +17,13 @@ export default function SearchBar({ onChange, ...props }: SearchBarProps) {
         placeholder="Rechercher une tâche"
         value={props.value}
         onChange={(event) => onChange(event.target.value)}
+        aria-label="Rechercher une tâche"
       />
-      <button type="button" className={styles.button}>
+      <button
+        type="button"
+        className={styles.button}
+        aria-label="Lancer la recherche"
+      >
         <MagGlassIcon />
       </button>
     </div>
