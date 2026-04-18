@@ -7,6 +7,7 @@ const DashboardLogo = (props?: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden={true}
     {...props}
   >
     <path d="M9.25 0H1.75C0.785 0 0 0.785 0 1.75V6.25C0 7.215 0.785 8 1.75 8H9.25C10.215 8 11 7.215 11 6.25V1.75C11 0.785 10.215 0 9.25 0Z" />
