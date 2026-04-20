@@ -26,7 +26,19 @@ Settings.embedModel = new MistralAIEmbedding({
   apiKey: process.env.MISTRAL_API_KEY,
 });
 
+/**
+ * Service responsible for interacting with LlamaIndex and Mistral AI
+ * to automate project management tasks.
+ */
 class LlamaIndexService {
+  /**
+   * Generates a list of suggested tasks based on project context and a user request.
+   * 
+   * @param data - The current project state including existing tasks.
+   * @param userRequest - The natural language prompt from the user.
+   * @returns A validated list of generated tasks.
+   * @throws {ApiError} If the intent is invalid or the LLM output is malformed.
+   */
   async generateTasks(
     data: TaskGenerationLlama,
     userRequest: string,
@@ -35,8 +47,10 @@ class LlamaIndexService {
 
     const documents = this.prepareDocuments(data);
 
+    // Create a summary index from the project documents for RAG (Retrieval-Augmented Generation)
     const index = await SummaryIndex.fromDocuments(documents);
     const queryEngine = index.asQueryEngine();
+    // Note: SummaryIndex is used here to ensure the LLM considers the full project context
 
     const prompt = `
     Tu es un assistant de gestion de projet expert. 
@@ -75,11 +89,18 @@ class LlamaIndexService {
       ]
     }`;
 
+    // Execute the query against the indexed project context
     const response = await queryEngine.query({ query: prompt });
 
     return this.parseAndValidate(response.toString());
   }
 
+  /**
+   * Validates if the user's request is relevant to project management.
+   * Prevents the LLM from processing off-topic or malicious prompts.
+   * 
+   * @param request - The user's input string.
+   */
   private async validateIntent(request: string): Promise<void> {
     const check = await Settings.llm.complete({
       prompt: `Réponds par 'OUI' si cette demande concerne la création de tâches ou la gestion de projet, sinon 'NON'. 
@@ -87,11 +108,18 @@ class LlamaIndexService {
       Demande: "${request}"`,
     });
 
+    // Check if the LLM explicitly rejected the intent
     if (check.text.trim().toUpperCase().includes("NON")) {
       throw new ApiError("Demande hors-sujet détectée.", [], 400);
     }
   }
 
+  /**
+   * Converts project data and existing tasks into LlamaIndex Document objects.
+   * 
+   * @param data - The project and task data.
+   * @returns An array of Documents for indexing.
+   */
   private prepareDocuments(data: TaskGenerationLlama): Document[] {
     const documents: Document[] = [];
 
@@ -103,6 +131,7 @@ class LlamaIndexService {
     );
 
     if (data.tasks.length > 0) {
+      // Format existing tasks into a list to help the LLM avoid duplicates
       const taskText = data.tasks
         .map((task) => `- [${task.status}] ${task.title}: ${task.description}`)
         .join("\n");
@@ -118,9 +147,17 @@ class LlamaIndexService {
     return documents;
   }
 
+  /**
+   * Cleans the raw LLM string output and validates it against the Zod schema.
+   * 
+   * @param rawText - The raw string returned by the LLM.
+   * @returns The parsed and validated GeneratedTasksResponse.
+   */
   private parseAndValidate(rawText: string): GeneratedTasksResponse {
     try {
+      // Remove potential Markdown code blocks (```json ... ```) often added by LLMs
       const cleanedText = rawText.replace(/```json|```/g, "").trim();
+      
       const json = JSON.parse(cleanedText);
       return GeneratedTasksResponseSchema.parse(json);
     } catch {
