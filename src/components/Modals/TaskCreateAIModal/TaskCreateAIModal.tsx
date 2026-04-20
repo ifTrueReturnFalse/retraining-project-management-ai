@@ -17,11 +17,21 @@ interface TaskCreateAIModalProps {
   closeModal: () => void;
 }
 
+/**
+ * Modal component that allows users to generate project tasks using AI.
+ * Users can input a natural language prompt, review generated tasks, and batch-save them to the project.
+ * 
+ * @param {Project} project - The current project context
+ * @param {Function} closeModal - Callback to close the modal
+ */
 export default function TaskCreateAIModal({
   project,
   closeModal,
 }: TaskCreateAIModalProps) {
+  // Fetch existing tasks to provide context to the AI for better generation
   const { tasks, isLoading, refreshTasks } = useProjectTasks(project.id);
+  
+  // UI State
   const [prompt, setPrompt] = useState("");
   const [generatingTasks, setGeneratingTasks] = useState(false);
   const [generatedTasks, setGeneratedTasks] = useState<GeneratedTask[]>([]);
@@ -29,12 +39,17 @@ export default function TaskCreateAIModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
+  /**
+   * Handles the AI generation request.
+   * Sends the current project state and user prompt to the TaskService.
+   */
   const onSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setGeneratingTasks(true);
     setError("");
     try {
       if (isLoading || prompt.length === 0) return;
+      // Prevent submission if tasks are still loading or prompt is empty
 
       const response = await TaskService.generateTasks({
         project,
@@ -57,12 +72,18 @@ export default function TaskCreateAIModal({
     }
   };
 
+  /**
+   * Removes a specific task from the local list of generated tasks before final submission.
+   */
   const deleteTask = (indexToDelete: number) => {
     setGeneratedTasks((prevTasks) =>
       prevTasks.filter((_, index) => index !== indexToDelete),
     );
   };
 
+  /**
+   * Updates a specific task's details (title, description, etc.) in the local state.
+   */
   const updateTask = (indexToUpdate: number, updatedTask: GeneratedTask) => {
     setGeneratedTasks((prevTask) =>
       prevTask.map((task, index) =>
@@ -71,12 +92,17 @@ export default function TaskCreateAIModal({
     );
   };
 
+  /**
+   * Persists all generated tasks to the database.
+   * Executes multiple POST requests in parallel and refreshes the task list upon completion.
+   */
   const submitTasks = async () => {
     if (generatedTasks.length === 0) {
       toast.error("Pas de tâches à ajouter");
       return;
     }
 
+    // Map generated tasks to TaskInput format and assign current user as default assignee
     setIsSubmitting(true);
     const promises = generatedTasks.map(async (task) => {
       const payload: TaskInput = {
@@ -94,6 +120,7 @@ export default function TaskCreateAIModal({
     });
 
     try {
+      // Wait for all API calls to resolve; if one fails, the catch block handles the partial failure notification
       await Promise.all(promises);
       toast.success("Toutes les tâches ont été ajoutées");
       setGeneratedTasks([]);

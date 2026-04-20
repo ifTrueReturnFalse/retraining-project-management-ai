@@ -24,8 +24,14 @@ const burgerItems = [
   { text: "Mon compte", Icon: null, url: routes.ACCOUNT },
 ];
 
+/**
+ * MenuBar component provides the main navigation for the application.
+ * It features a responsive design with a sidebar for large screens 
+ * and a burger menu for mobile devices.
+ */
 export default function MenuBar() {
   const pathname = usePathname();
+  // Split the pathname to determine the active section (e.g., /projects/1 -> projects)
   const paths = pathname.split("/");
   const { user } = useRequiredUser();
   const [burgerMenuOpen, setBurgerMenuOpen] = useState(false);

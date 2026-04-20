@@ -6,10 +6,22 @@ import TaskCreateModal from "../TaskCreateModal/TaskCreateModal";
 import ProjectUpdateModal from "../ProjectUpdateModal/ProjectUpdateModal";
 import TaskCreateAIModal from "../TaskCreateAIModal/TaskCreateAIModal";
 
+/**
+ * ModalManager component acts as a central registry for all modals in the application.
+ * It listens to the global modal store and renders the appropriate modal component
+ * based on the current state.
+ * 
+ * @returns {JSX.Element | null} The active modal wrapped in BaseModal, or null if no modal is active.
+ */
 export default function ModalManager() {
+  // Access the global state to determine which modal to display and its associated data
   const { payload, isOpen, close } = useModalStore();
   const { type, data } = payload;
 
+  /**
+   * Switch statement to handle different modal types.
+   * Each case returns a specific modal component wrapped in the BaseModal layout.
+   */
   switch (type) {
     case "NONE":
       return null;
