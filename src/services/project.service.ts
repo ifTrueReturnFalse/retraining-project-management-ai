@@ -13,7 +13,16 @@ import {
   ProjectGetAllApiResponseSchema,
 } from "@/schemas/project.schema";
 
+/**
+ * Service for managing project-related operations on the client side.
+ * Interacts with internal Next.js API routes.
+ */
 export const ProjectService = {
+  /**
+   * Retrieves detailed information for a specific project by its ID.
+   * @param projectId - The unique identifier of the project.
+   * @returns The project details.
+   */
   getProjectWithId: async (projectId: BasicProject["id"]) => {
     const response = await handleRequest(
       internalApi.get(`/api/project/${projectId}`),
@@ -23,6 +32,10 @@ export const ProjectService = {
     return response.data.project;
   },
 
+  /**
+   * Fetches a list of all users available in the system (e.g., for project assignment).
+   * @returns A list of user objects.
+   */
   getAllUsers: async () => {
     const response = await handleRequest(
       internalApi.get("/api/users"),
@@ -32,6 +45,11 @@ export const ProjectService = {
     return response.data.users;
   },
 
+  /**
+   * Creates a new project.
+   * @param data - The project creation details (name, description, members).
+   * @returns The API response containing the created project data.
+   */
   createProject: async (data: CreateProjectInput) => {
     const response = await handleRequest(
       internalApi.post("/api/project", data),
@@ -41,6 +59,10 @@ export const ProjectService = {
     return response;
   },
 
+  /**
+   * Retrieves all projects associated with the current user.
+   * @returns A list of projects.
+   */
   getAllProjects: async () => {
     const response = await handleRequest(
       internalApi.get("/api/project"),
@@ -50,6 +72,12 @@ export const ProjectService = {
     return response.data.projects;
   },
 
+  /**
+   * Updates an existing project's information.
+   * @param projectId - The ID of the project to update.
+   * @param data - The updated project fields.
+   * @returns The API response status.
+   */
   updateProject: async (projectId: Project["id"], data: UpdateProjectInput) => {
     const response = await handleRequestWithoutValidation(
       internalApi.put(`/api/project/${projectId}`, data),
@@ -58,6 +86,11 @@ export const ProjectService = {
     return response;
   },
 
+  /**
+   * Deletes a project from the system.
+   * @param projectId - The ID of the project to remove.
+   * @returns The API response status.
+   */
   deleteProject: async (projectId: Project["id"]) => {
     const response = await handleRequestWithoutValidation(
       internalApi.delete(`/api/project/${projectId}`),
