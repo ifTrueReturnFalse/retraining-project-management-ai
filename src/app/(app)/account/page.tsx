@@ -13,6 +13,11 @@ import { useState } from "react";
 import { authService } from "@/services/auth.client.service";
 import { toast } from "sonner";
 
+/**
+ * AccountPage Component
+ * 
+ * Provides a form for users to update their profile information (name, email) and change their password.
+ */
 export default function AccountPage() {
   const { user, setUser } = useRequiredUser();
   const {
@@ -33,11 +38,18 @@ export default function AccountPage() {
   });
   const [isLoading, setIsLoading] = useState(false)
 
+  /**
+   * Handles form submission for both profile updates and password changes.
+   * 
+   * @param data - The validated form data from React Hook Form
+   */
   const onSubmit = async (data: UserAccountInputFront) => {
     try {
       setIsLoading(true)
       const { name, familyName, email, oldPassword, newPassword } = data;
 
+      // Check if profile information (name or email) has changed before calling the API
+      // user.name is stored as a full string, so we compare it against the concatenated inputs
       if (user.name !== `${name} ${familyName}` || user.email !== email) {
         const payload = {
           name: `${name} ${familyName}`,
@@ -54,6 +66,7 @@ export default function AccountPage() {
         }
       }
 
+      // If the user filled out the password fields, attempt to update the password
       if (oldPassword.length > 0 && newPassword.length > 0) {
         const payload = {
           currentPassword: oldPassword,
@@ -65,6 +78,7 @@ export default function AccountPage() {
         if (!response.success) {
           toast.error(response.message)
         } else {
+          // Reset password fields on success to prevent accidental re-submissions
           toast.success(response.message)
           setValue("oldPassword", "")
           setValue("newPassword", "")
