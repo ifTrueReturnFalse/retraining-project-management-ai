@@ -26,10 +26,20 @@ interface ProjectTasksContainerProps {
   projectId: Project["id"];
 }
 
+/**
+ * Container component for managing and displaying project tasks.
+ * Handles filtering by status, searching by text, and sorting by priority/date.
+ * 
+ * @param {ProjectTasksContainerProps} props - The component props containing projectId.
+ */
 export default function ProjectTasksContainer({
   projectId,
 }: ProjectTasksContainerProps) {
   const searchParams = useSearchParams();
+  /**
+   * viewType determines the layout (list vs calendar). 
+   * Currently defaults to 'list' as calendar is not implemented.
+   */
   const viewType = searchParams.get("view") || "list";
   const { tasks, isLoading } = useProjectTasks(projectId);
   const [filterStatus, setFilterStatus] = useState("ALL");
@@ -40,12 +50,21 @@ export default function ProjectTasksContainer({
 
   const { query, setQuery, filteredItems } = useSearch(tasks, filterFunction);
 
+  /**
+   * Memoized logic to filter and sort tasks.
+   * 1. Filters by status (if not 'ALL').
+   * 2. Sorts by priority weight (descending).
+   * 3. Sorts by due date (ascending) if priorities are equal.
+   */
   const statusFilteredTasks = useMemo(() => {
     const unsortedItems =
       filterStatus === "ALL"
         ? [...filteredItems]
         : filteredItems.filter((item) => item.status === filterStatus);
+        
     return unsortedItems.sort((a, b) => {
+      // Calculate priority difference based on numeric weights defined in TaskPriorityLabels
+      // Higher weight (e.g., HIGH) comes first.
       const priority =
         TaskPriorityLabels[b.priority].weight -
         TaskPriorityLabels[a.priority].weight;
