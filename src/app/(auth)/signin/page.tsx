@@ -16,6 +16,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import routes from "@/utils/routes";
 
+/**
+ * SignInPage component handles new user registration.
+ * It utilizes react-hook-form with Zod validation to manage form state,
+ * performs the registration via authService, and redirects to the dashboard.
+ */
 export default function SignInPage() {
   const {
     register,
@@ -36,10 +41,16 @@ export default function SignInPage() {
   const { setUser } = useUser();
   const router = useRouter();
 
+  /**
+   * Processes the registration form submission.
+   * @param {UserRegisterInputFront} data - The validated form data.
+   */
   const onSubmit = async (data: UserRegisterInputFront) => {
     try {
       setIsLoading(true);
       const { email, name, familyName, password } = data;
+      
+      // Concatenate first and last name to match the backend User schema
       const payload = {
         name: `${name} ${familyName}`,
         email,
@@ -52,8 +63,10 @@ export default function SignInPage() {
         toast.error(response.message);
       } else {
         toast.success(response.message);
+        // Update global user context with the newly created user session
         setUser(response.data.user);
         router.refresh();
+        // Small timeout to ensure cookies/state are synchronized before navigation
         window.setTimeout(() => {
           router.push(routes.DASHBOARD);
         }, 50);

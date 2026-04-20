@@ -11,6 +11,11 @@ import { useRouter } from "next/navigation";
 import { ApiError } from "@/models/api.model";
 import { useUser } from "@/context/UserContext";
 
+/**
+ * LoginPage component handles user authentication.
+ * It provides a form for email and password, manages local state for credentials,
+ * and interacts with the authService to log the user in.
+ */
 export default function LoginPage() {
   const [credentials, setCredentials] = useState({
     email: "",
@@ -22,11 +27,21 @@ export default function LoginPage() {
 
   const router = useRouter();
 
+  /**
+   * Updates the credentials state when an input field value changes.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the input.
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCredentials((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles the form submission.
+   * Prevents default behavior, calls the login service, updates global user context,
+   * and redirects the user to the dashboard upon success.
+   * @param {React.SubmitEvent} e - The form submission event.
+   */
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -34,8 +49,11 @@ export default function LoginPage() {
 
     try {
       const response = await authService.login(credentials);
+      // Update global user state with the returned user data
       setUser(response.user);
+      // Force a refresh to ensure middleware/server components recognize the new session cookie
       router.refresh();
+      // Small delay to ensure state/cookies are processed before navigation
       window.setTimeout(() => {
         router.push("/dashboard");
       }, 50);

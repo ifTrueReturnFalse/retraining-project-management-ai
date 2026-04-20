@@ -22,17 +22,26 @@ export const metadata: Metadata = {
   description: "Your AI project management app",
 };
 
+/**
+ * Root layout component that wraps the entire application.
+ * Handles server-side authentication check and provides global providers.
+ */
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Retrieve the authentication token from cookies to verify session on the server
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_jwt");
   let user = null;
 
   if (token) {
     try {
+      /** 
+       * Fetch user profile from the server service. 
+       * This ensures the UI is hydrated with the correct user state immediately.
+       */
       user = await authServerService.profile();
     } catch {
       user = null;
@@ -42,6 +51,7 @@ export default async function RootLayout({
   return (
     <html lang="fr">
       <body className={`${inter.variable} ${manrope.variable}`}>
+        {/* Global utility for managing keyboard shortcuts/events */}
         <KeyboardManager />
         <Toaster
           visibleToasts={5}
@@ -54,6 +64,7 @@ export default async function RootLayout({
             },
           }}
         />
+        {/* Wrap application in UserProvider to share auth state across client components */}
         <UserProvider initialUser={user}>{children}</UserProvider>
       </body>
     </html>
