@@ -40,6 +40,8 @@ Le projet a été réalisé avec **Next.js (App Router)** et **TypeScript**, en 
 
 ## Installation & utilisation
 
+> [!IMPORTANT]
+> Ce projet nécessite le [fork de l'API OpenClassrooms](https://github.com/ifTrueReturnFalse/retraining-project-management-ai-backend) pour fonctionner correctement.  
 > Ce projet utilise [pnpm](https://pnpm.io/) pour la gestion des dépendances. Assurez-vous de l'avoir installé sur votre machine.
 
 1. Cloner le dépôt
@@ -104,7 +106,9 @@ The project was built using **Next.js (App Router**) and **TypeScript**, with a 
 
 ## Installation & Usage
 
-> This project uses pnpm for dependency management. Make sure you have it installed on your machine.
+> [!IMPORTANT]
+> This project requires this [OpenClassrooms API fork](https://github.com/ifTrueReturnFalse/retraining-project-management-ai-backend) to run correctly.  
+> This project uses [pnpm](https://pnpm.io/) for dependency management. Make sure you have it installed on your machine.
 
 1. Clone the repository:
 
